@@ -4,7 +4,7 @@ const { User } = require('../../models');
 router.get('/:userId', async (req, res) => {
   console.log("hit")
     try {
-      const userData = await User.findByPk(1, {
+      const userData = await User.findByPk(req.session.user_id, {
           attributes: { exclude: ['password'] },
           // include: [
           //     { model: Product },

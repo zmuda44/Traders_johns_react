@@ -1,44 +1,106 @@
+import { useState } from "react";
+
+
 function Login () {
 
+  const [userSignupFormState, setSignupFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+  })
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setSignupFormState({
+      ...userSignupFormState,
+      [name]: value,
+    });
+  };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userSignupFormState),
+      });
+
+      // if (response.ok) {
+      //   setFormSubmitted(true);
+      //   setFormState({
+      //     description: "",
+      //     completionTimeMonths: "",
+      //     completionTimeDays: "",
+      //     startDate: "",
+      //     endDate: "",
+      //     manHours: "",
+      //     customerName: "",
+      //     customerEmail: "",
+      //     customerPhone: ""
+      //   });
+      // }
+   
+    //  window.location.reload();
+    console.log(response)
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
 return (
 
-<div class="login-signup-section">
+<div className="login-signup-section">
 
-
-<div>logged in</div>
-
-<div class="login">
+<div className="login">
   <h2>Login</h2>
-  <form id="login-form" class="form">
-    <div class="form-section">
-      <label for="user-name">user name</label>
+  <form id="login-form" className="form">
+    <div className="form-section">
+      <label htmlFor="user-name">user name</label>
       <input type="text" id="login-user-name" name="login-user-name" />
     </div>
-    <div class="form-section">
-      <label for="password">password</label>
+    <div className="form-section">
+      <label htmlFor="password">password</label>
       <input type="password" id="login-password" name="password" />
   </div>
   <button id="login-btn">Login</button>  
 </form>
 </div>
 
-<div class="signup">
+<div className="signup">
 <h2>Sign up</h2>
-<form id="login-form" class="form">
-  <div class="form-section">
-    <label for="signup-user-name">user name</label>
-    <input type="text" id="signup-user-name" name="user-name" />      
+<form id="signup-form" className="form" onSubmit={handleFormSubmit}>
+  <div className="form-section">
+    <label htmlFor="signup-user-name">user name</label>
+    <input 
+    type="text" 
+    id="signup-user-name" 
+    name="username" 
+    value={userSignupFormState.username} 
+    onChange={handleChange} 
+    />     
   </div>
-  <div class="form-section">
-     <label for="signup-email">email</label>
-     <input type="email" id="signup-email" name="email" />
+  <div className="form-section">
+     <label htmlFor="signup-email">email</label>
+     <input 
+     type="email" 
+     id="signup-email" 
+     name="email" 
+     value={userSignupFormState.email}
+      onChange={handleChange}
+     />
   </div>
-  <div class="form-section">
-    <label for="signup-password">password</label>
-    <input type="password" id="signup-password" name="password" />
+  <div className="form-section">
+    <label htmlFor="signup-password">password</label>
+    <input 
+    type="password" 
+    id="signup-password" 
+    name="password"
+    value={userSignupFormState.password}
+    onChange={handleChange}
+     />
   </div>
   <button id="signup-btn">Signup</button>
 </form>

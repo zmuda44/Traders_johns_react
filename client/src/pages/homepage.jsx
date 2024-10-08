@@ -1,6 +1,40 @@
-
+import { useState, useEffect } from "react";
 
 function Homepage () {
+
+const [productsDisplayState, setProductsDisplayState] = useState([])
+//   productName: "",
+//   description: "",
+//   price: "",
+//   category_id: "",
+//   user_id: ""
+// })
+
+useEffect(() => {
+  const getProductsData = async () => {
+      try {
+      const response = await fetch(`/api/products`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }          
+      })
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }     
+
+      const productsData = await response.json()
+     
+      setProductsDisplayState(productsData)
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+      getProductsData();
+  }, []);
+
 
 
 return (
@@ -53,15 +87,17 @@ return (
   <h3>Currently Watched Items</h3>
     <div className="card-container">
 
-      <div className="card" value="">
-        <h3 className="product-name"></h3>
-        <p className="product-description"></p>
-        <p className="product-price">$  </p>
-        <p className="product-category"></p>
+    {productsDisplayState.map((product) => (
+
+      <div key={product.id} className="card" value="">
+        <h3 className="product-name">{product.product_name}</h3>
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">$ {product.price} </p>
+        <p className="product-category">{product.category.category_name}</p>
 
         <img src="" />
       </div>
-
+    ))}
 
 
     </div>
@@ -75,7 +111,7 @@ return (
   </div>
 </div>
 
-<div>something</div>
+
 
 </div>
 )

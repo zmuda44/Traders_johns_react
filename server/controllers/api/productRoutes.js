@@ -97,16 +97,7 @@ router.post('/:product_id/purchased', async (req, res) => {
   }
 })
 
-
-
-
-
-
-
 //originally from home route
-
-
-
 router.get('/', async (req, res) => {
   console.log("path hit")
   try {

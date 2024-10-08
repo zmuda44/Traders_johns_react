@@ -13,7 +13,7 @@ const [userState, setUserState] = useState({ userName: "" })
 useEffect(() => {
   const getUserData = async () => {
       try {
-      const response = await fetch(`/api/users/1`, {
+      const response = await fetch(`/api/users/2`, {
         headers: {
           'Content-Type': 'application/json',
         }          
@@ -49,11 +49,15 @@ return (
 
       <div className="header-link-container">
 
-        {userState.userName ? <h4>Welcome, {userState.userName}</h4> : null}
-        <a href="/profile" className="homepage-link">Profile</a> 
+        {userState.userName ? (
+        <>            
+        <h4>Welcome, {userState.userName}</h4> 
+        <a href="/profile" className="homepage-link">Profile</a>
         <a className="logout-link">Logout</a>
-
+        </>
+        ) : (
         <a href="/login" className="login-signup">Login or Signup here to begin buying and selling</a>
+        )}
 
       </div>
 
