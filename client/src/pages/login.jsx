@@ -9,7 +9,13 @@ function Login () {
     password: "",
   })
 
-  const handleChange = (event) => {
+  const [userLoginFormState, setLoginFormState] = useState({
+    username: "",
+    // email: "",
+    password: "",
+  })
+
+  const handleSignupChange = (event) => {
     const { name, value } = event.target;
     setSignupFormState({
       ...userSignupFormState,
@@ -17,7 +23,15 @@ function Login () {
     });
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleLoginChange = (event) => {
+    const { name, value } = event.target;
+    setLoginFormState({
+      ...userLoginFormState,
+      [name]: value,
+    });
+  };
+
+  const handleSignupFormSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch('/api/users', {
@@ -50,20 +64,43 @@ function Login () {
     }
   };
 
+  const handleLoginFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userLoginFormState),
+      });
+      console.log(response)
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 return (
 
 <div className="login-signup-section">
 
 <div className="login">
   <h2>Login</h2>
-  <form id="login-form" className="form">
+  <form id="login-form" className="form" onSubmit={handleLoginFormSubmit}>
     <div className="form-section">
       <label htmlFor="user-name">user name</label>
-      <input type="text" id="login-user-name" name="login-user-name" />
+      <input type="text" 
+      id="login-user-name"
+      name="username"
+      onChange={handleLoginChange} />
     </div>
     <div className="form-section">
       <label htmlFor="password">password</label>
-      <input type="password" id="login-password" name="password" />
+      <input type="password" 
+      id="login-password" 
+      name="password"
+      onChange={handleLoginChange}
+       />
   </div>
   <button id="login-btn">Login</button>  
 </form>
@@ -71,7 +108,7 @@ return (
 
 <div className="signup">
 <h2>Sign up</h2>
-<form id="signup-form" className="form" onSubmit={handleFormSubmit}>
+<form id="signup-form" className="form" onSubmit={handleSignupFormSubmit}>
   <div className="form-section">
     <label htmlFor="signup-user-name">user name</label>
     <input 
@@ -79,7 +116,7 @@ return (
     id="signup-user-name" 
     name="username" 
     value={userSignupFormState.username} 
-    onChange={handleChange} 
+    onChange={handleSignupChange} 
     />     
   </div>
   <div className="form-section">
@@ -89,7 +126,7 @@ return (
      id="signup-email" 
      name="email" 
      value={userSignupFormState.email}
-      onChange={handleChange}
+      onChange={handleSignupChange}
      />
   </div>
   <div className="form-section">
@@ -99,7 +136,7 @@ return (
     id="signup-password" 
     name="password"
     value={userSignupFormState.password}
-    onChange={handleChange}
+    onChange={handleSignupChange}
      />
   </div>
   <button id="signup-btn">Signup</button>

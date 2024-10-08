@@ -13,7 +13,7 @@ const [userState, setUserState] = useState({ userName: "" })
 useEffect(() => {
   const getUserData = async () => {
       try {
-      const response = await fetch(`/api/users/2`, {
+      const response = await fetch(`/api/users/me`, {
         headers: {
           'Content-Type': 'application/json',
         }          
@@ -37,7 +37,20 @@ useEffect(() => {
       getUserData();
   }, []);
 
-  console.log(userState)
+ async function handleLogout () {
+    const response = await fetch('/api/users/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert(response.statusText);
+    }
+
+
+  }
 
 return (
 <header>
@@ -53,7 +66,7 @@ return (
         <>            
         <h4>Welcome, {userState.userName}</h4> 
         <a href="/profile" className="homepage-link">Profile</a>
-        <a className="logout-link">Logout</a>
+        <a className="logout-link" onClick={handleLogout}>Logout</a>
         </>
         ) : (
         <a href="/login" className="login-signup">Login or Signup here to begin buying and selling</a>

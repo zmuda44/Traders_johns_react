@@ -1,9 +1,14 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-router.get('/:userId', async (req, res) => {
-  console.log("hit")
+router.get('/me', async (req, res) => {
+
     try {
+
+        if (!req.session.user_id) {
+        return res.status(401).json({ message: 'Not logged in' });
+      }
+  
       const userData = await User.findByPk(req.session.user_id, {
           attributes: { exclude: ['password'] },
           // include: [
@@ -17,7 +22,7 @@ router.get('/:userId', async (req, res) => {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      res.json(userData)
+      res.json({username: userData.username})
 
 
 
@@ -28,9 +33,8 @@ router.get('/:userId', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body)
     const userData = await User.create(req.body);
-
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -45,16 +49,15 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log(req);
+
   try {
     const username = req.body.username;
     const password = req.body.password;
 
     const userData = await User.findOne({ where: { username: username } });
     if (!userData) {
-      return       res
-      .status(400)
-      .json({ message: 'Incorrect username or password, please try again' });
+      return       
+      res.status(400).json({ message: 'Incorrect username or password, please try again' });
     }
     const validPassword = userData.checkPassword(password);
 
@@ -66,7 +69,7 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.dataValues.id;
+      req.session.user_id = userData.id;
       req.session.logged_in = true;
 
       res.status(204).end();
