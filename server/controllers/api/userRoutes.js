@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Product, WatchedProduct } = require('../../models');
 
 router.get('/me', async (req, res) => {
 
@@ -33,7 +33,6 @@ router.get('/me', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body)
     const userData = await User.create(req.body);
 
     req.session.save(() => {
@@ -90,6 +89,74 @@ router.post('/logout', (req, res) => {
     res.status(404).end()
   }
 });
+
+router.get('/products/watched', async (req, res) => {
+  console.log(req.session.user_id)
+
+  let userId = req.session.user_id || 1;
+
+  console.log(userId)
+
+  const user = await User.findByPk(userId, {
+    include: [{
+      model: Product, // Assuming the Product model is related to User through WatchedProducts
+      through: WatchedProduct, // Specifies the join table
+      as: 'user_watched_products', // Alias for the products user has watched
+    //   include: [{
+    //     model: Category,
+    //     attributes: ['category_name'],
+    // }]
+    }]
+  });
+
+res.json(user)
+
+})
+
+router.post('/products/:product_id/watched', async (req, res) => {
+  try {
+    let userId;
+
+    if(!req.session.user_id) {
+      userId = 1
+    }
+    else {
+      userId = req.session.user_id
+    }
+
+
+
+   
+    const productId = req.params.product_id 
+
+    console.log(productId)
+
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.json('User not found');
+    }
+ 
+    // Find the product by ID
+    const product = await Product.findByPk(productId);
+    if (product == undefined) {
+      console.log("no product")
+      return res.json('Product not found');
+    }
+
+    // Add the product to the user's watched products
+    const data = { user_id: userId, product_id: productId }
+    const purchasedProductData = await WatchedProduct.create(data);
+
+    //Why does this not console.log this?
+    // console.log(`Product (ID: ${productId}) has been added to User (ID: ${userId})'s purchased products.`);
+
+    res.send(product)
+
+  } catch (error) {
+    console.error('Error adding product to watched products:', error);
+
+  }
+})
 
 module.exports = router;
 

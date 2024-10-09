@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import WatchedItems from '../components/Watched-items'
+import CategoryItems from '../components/Category-items'
 
 function Homepage () {
 
@@ -43,7 +45,7 @@ return (
 
 <aside className="categories">
   <h2>Categories</h2>
-  <button className="category-names" value="1">
+  <button className="category-names" value="1" onClick={handleCategoryClick}>
   Produce
   </button>
   <button className="category-names" value="2">
@@ -82,29 +84,12 @@ return (
 
 <div className="main-homepage-content">
 
-
-  <div id="watched-items"></div>
-  <h3>Currently Watched Items</h3>
-    <div className="card-container">
-
-    {productsDisplayState.map((product) => (
-
-      <div key={product.id} className="card" value="">
-        <h3 className="product-name">{product.product_name}</h3>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">$ {product.price} </p>
-        <p className="product-category">{product.category.category_name}</p>
-
-        <img src="" />
-      </div>
-    ))}
+  <WatchedItems />
+  
+  <CategoryItems />
+>
 
 
-    </div>
-  <div className="category-items">
-    <h3>Chosen Category Items</h3>
-
-  </div>
   <div className="popular-items">
     <h3>Popular Items</h3>
 

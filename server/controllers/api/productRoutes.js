@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 });
 
 //Get route for when button is pressed on hompage, only show that category on this page
-router.get('/:category_id', async (req,res) => {
+router.get('/category/:category_id', async (req,res) => {
   try {
     console.log("new route hit")
       let products = await Product.findAll({ where: {category_id: req.params.category_id}, 
@@ -35,36 +35,8 @@ router.get('/:category_id', async (req,res) => {
   }
 })
 
-router.post('/:product_id/watched', async (req, res) => {
-  try {
-    const userId = req.body.user_id
-    const productId = req.params.product_id   
 
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.json('User not found');
-    }
- 
-    // Find the product by ID
-    const product = await Product.findByPk(productId);
-    if (!product) {
-      return res.json('Product not found');
-    }
 
-    // Add the product to the user's watched products
-    const data = { user_id: userId, product_id: productId }
-    const watchedProduct = await WatchedProduct.create(data);
-
-    //Why does this not console.log this?
-    console.log(`Product (ID: ${productId}) has been added to User (ID: ${userId})'s watched products.`);
-
-    res.send(watchedProduct)
-
-  } catch(error) {
-    console.error(error);
-
-  }
-})
 
 router.post('/:product_id/purchased', async (req, res) => {
   try {
