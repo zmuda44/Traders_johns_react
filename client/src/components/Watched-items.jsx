@@ -30,8 +30,6 @@ useEffect(() => {
       getProductsData();
   }, []);
 
-console.log(productsDisplayState)
-
 return (
 
 <div id="watched-items">

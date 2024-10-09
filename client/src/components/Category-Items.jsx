@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-function CategoryItems () {
+function CategoryItems (props) {
+
+  console.log(props.categoryId)
 
 const [productsDisplayState, setProductsDisplayState] = useState([])
 
@@ -8,7 +10,7 @@ const [productsDisplayState, setProductsDisplayState] = useState([])
 useEffect(() => {
   const getProductsData = async () => {
       try {
-      const response = await fetch(`/api/products/category/1`, {
+      const response = await fetch(`/api/products/category/${props.categoryId}`, {
         headers: {
           'Content-Type': 'application/json',
         }          
@@ -28,9 +30,8 @@ useEffect(() => {
   };
 
       getProductsData();
-  }, []);
+  }, [props.categoryId]);
 
-console.log(productsDisplayState)
 
 return (
 

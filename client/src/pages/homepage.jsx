@@ -37,7 +37,12 @@ useEffect(() => {
       getProductsData();
   }, []);
 
+  const [categoryButtonState, setCategoryButtonState] = useState({value: 1})
 
+  const handleCategoryClick = (event) => {
+    const categoryId = event.target.value;
+    setCategoryButtonState({value: categoryId})
+  };  
 
 return (
 <div className="homepage-main">
@@ -48,34 +53,34 @@ return (
   <button className="category-names" value="1" onClick={handleCategoryClick}>
   Produce
   </button>
-  <button className="category-names" value="2">
+  <button className="category-names" value="2" onClick={handleCategoryClick}>
     Meat
   </button>
-  <button className="category-names" value="3">
+  <button className="category-names" value="3" onClick={handleCategoryClick}>
     Seafood
   </button>
-  <button className="category-names" value="4">
+  <button className="category-names" value="4" onClick={handleCategoryClick}>
     Dairy
   </button>
-  <button className="category-names" value="5">
+  <button className="category-names" value="5" onClick={handleCategoryClick}>
     Snacks
   </button>
-  <button className="category-names" value="6">
+  <button className="category-names" value="6" onClick={handleCategoryClick}>
     Dry-Goods
   </button>
-  <button className="category-names" value="7">
+  <button className="category-names" value="7" onClick={handleCategoryClick}>
     Canned-Goods
   </button>
-  <button className="category-names" value="8">
+  <button className="category-names" value="8" onClick={handleCategoryClick}>
     Condiments
   </button>
-  <button className="category-names" value="9">
+  <button className="category-names" value="9" onClick={handleCategoryClick}>
     Bakery
   </button>
-  <button className="category-names" value="10">
+  <button className="category-names" value="10" onClick={handleCategoryClick}>
     Cereal
   </button>
-  <button className="category-names" value="11">
+  <button className="category-names" value="11" onClick={handleCategoryClick}>
     Frozen-Goods
   </button>
 </aside>
@@ -86,8 +91,8 @@ return (
 
   <WatchedItems />
   
-  <CategoryItems />
->
+  <CategoryItems categoryId = {categoryButtonState.value} />
+
 
 
   <div className="popular-items">
