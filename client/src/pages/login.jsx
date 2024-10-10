@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 function Login () {
@@ -33,6 +34,8 @@ function Login () {
 
   const handleSignupFormSubmit = async (event) => {
     event.preventDefault();
+    const navigate = useNavigate()
+
     try {
       const response = await fetch('/api/users', {
           method: 'POST',
@@ -42,23 +45,13 @@ function Login () {
           body: JSON.stringify(userSignupFormState),
       });
 
-      // if (response.ok) {
-      //   setFormSubmitted(true);
-      //   setFormState({
-      //     description: "",
-      //     completionTimeMonths: "",
-      //     completionTimeDays: "",
-      //     startDate: "",
-      //     endDate: "",
-      //     manHours: "",
-      //     customerName: "",
-      //     customerEmail: "",
-      //     customerPhone: ""
-      //   });
-      // }
-   
-    //  window.location.reload();
-    console.log(response)
+      if (response.ok) {
+        // Redirect to the homepage upon successful login
+        navigate('/');
+      } else {
+        console.log("Login failed.");
+      }  
+
     } catch (e) {
       console.error(e);
     }
@@ -66,6 +59,8 @@ function Login () {
 
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
+
+
     try {
       const response = await fetch('/api/users/login', {
           method: 'POST',
@@ -74,7 +69,14 @@ function Login () {
           },
           body: JSON.stringify(userLoginFormState),
       });
-      console.log(response)
+
+      if (response.ok) {
+        // Redirect to the homepage upon successful login
+        window.location.reload();
+      } else {
+        console.log("Login failed.");
+      }
+
     } catch (e) {
       console.error(e);
     }

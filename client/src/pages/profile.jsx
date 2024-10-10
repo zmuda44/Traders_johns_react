@@ -1,60 +1,115 @@
+import { useState } from "react";
+
+
 function Profile () {
+
+  const [productFormState, setProductFormState] = useState({
+    product_name: "",
+    description: "",
+    price: "",
+    category_id: "",
+    username: "",
+  })
+
+  const handleProductChange = (event) => {
+    const { name, value } = event.target;
+    setProductFormState({
+      ...productFormState,
+      [name]: value,
+    });
+  };
+
+  const handleProductFormSubmit = async (event) => {
+    event.preventDefault();
+
+
+    try {
+      const response = await fetch('/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productFormState),
+      });
+
+      if (response.ok) {
+        // Redirect to the homepage upon successful login
+        navigate('/');
+
+      } else {
+        console.log("Login failed.");
+      }  
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
 
 
 return (
-<div class="profile-section">
+<div className="profile-section">
   <h1>Welcome, !</h1>
 
 
-  <div class="profile-section-block">
+  <div className="profile-section-block">
     <h3>All products currently available</h3>
-    <div class="card-container">
+    <div className="card-container">
 
-      <div class="card" value="">
+      <div className="card" value="">
 
-        <h3 class="product-name"></h3>
-        <p class="product-description"></p>
-        <p class="product-price">$ </p>
-        <p class="product-category"></p>
+        <h3 className="product-name"></h3>
+        <p className="product-description"></p>
+        <p className="product-price">$ </p>
+        <p className="product-category"></p>
         <img src="" />
       </div>
 
     </div>
   </div>
 
-  <div class="profile-section-block">
+  <div className="profile-section-block">
     <h3>Current User Products:</h3>
-    <div class="card-container">
+    <div className="card-container">
 
-      <div class="card" value="">
-      <h3 class="product-name"></h3>
-      <p class="product-description"></p>
-      <p class="product-price">$  </p>
-      <p class="product-category"></p>
+      <div className="card" value="">
+      <h3 className="product-name"></h3>
+      <p className="product-description"></p>
+      <p className="product-price">$  </p>
+      <p className="product-category"></p>
       <img src="" />
     </div>
 
     </div>
   </div>
 
-  <div class="create-new-product">
+  <div className="create-new-product">
     <h3>Create a New Product:</h3>
     <form id="new-product">
-      <div class="form-section">
-        <label for="product-name">Product name:</label>
-        <input type="text" id="product-name" name="product-name" />
+      <div className="form-section">
+        <label htmlFor="product-name">Product name:</label>
+        <input type="text" 
+        id="product-name" 
+        name="product_name" />
+        value={productFormState.product_name}
+        onChange={handleProductChange}
       </div>
-      <div class="form-section">
-        <label for="product-description">Product Description</label>
-        <textarea class="form-input" id="product-description" name="product-description"></textarea>
+      <div className="form-section">
+        <label htmlFor="product-description">Product Description</label>
+        <textarea className="form-input" 
+        id="product-description" 
+        name="description">
+        value={productFormState.description}
+        onChange={handleProductChange}
+        </textarea>
       </div>
-      <div class="form-section">
-        <label for="price">Price</label>
-        <input class="form-input" id="price" name="price"></input>
+      <div className="form-section">
+        <label htmlFor="price">Price</label>
+        <input className="form-input" id="price" name="price"></input>
       </div>
-      <div class="form-section">
-        <label for="product-category">Category</label>
+      <div className="form-section">
+        <label htmlFor="product-category">Category</label>
         <select id="product-category" name="product-category">
           <option value="1">Produce</option>
           <option value="2">Meat</option>
@@ -69,8 +124,8 @@ return (
           <option value="11">Frozen-Goods</option>
         </select>
       </div>
-      <div class="form-section">
-        <button class="product-create-btn">List a new product</button>
+      <div className="form-section">
+        <button className="product-create-btn">List a new product</button>
       </div>
     </form>
   </div>
@@ -80,7 +135,7 @@ return (
 export default Profile
 
 
-{/* <div class="profile-section">
+{/* <div className="profile-section">
   <h1>Welcome, {{username}}!</h1>
 
   {{!-- All products currently available --}}

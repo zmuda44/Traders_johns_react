@@ -86,18 +86,8 @@ router.get('/popular', async (req, res) => {
     console.log(err)
   }
 
-
-  // try {
-  //   const popularProductsData = await Product.findAll({
-  //   })
-  // }
-  // catch (err) {
-  //   console.log(err)
-  // }
-
-
-
 })
+
 
 
 

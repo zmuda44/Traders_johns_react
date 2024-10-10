@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 
 function CategoryItems (props) {
 
-  console.log(props.categoryId)
-
-const [productsDisplayState, setProductsDisplayState] = useState([])
-
+ const [productsDisplayState, setProductsDisplayState] = useState([])
 
 useEffect(() => {
   const getProductsData = async () => {

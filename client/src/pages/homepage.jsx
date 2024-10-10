@@ -6,8 +6,7 @@ import PopularItems from '../components/Popular-items'
 
 function Homepage () {
 
-const [UserDisplayState, setUserDisplayState] = useState([])
-
+const [UserDisplayState, setUserDisplayState] = useState(null)
 
 useEffect(() => {
   const getUserData = async () => {
@@ -22,9 +21,9 @@ useEffect(() => {
         throw new Error('something went wrong!');
       }     
 
-      const productsData = await response.json()
+      const userData = await response.json()
      
-      setUserDisplayState(UserData)
+      setUserDisplayState({userData})
 
     } catch (err) {
       console.error(err);
@@ -40,6 +39,8 @@ useEffect(() => {
     const categoryId = event.target.value;
     setCategoryButtonState({value: categoryId})
   };  
+
+  console.log(UserDisplayState)
 
 return (
 <div className="homepage-main">
@@ -86,9 +87,13 @@ return (
 
 <div className="main-homepage-content">
 
-  <PopularItems />
+  
 
-  <WatchedItems />
+  
+
+  {UserDisplayState && <WatchedItems />}
+
+  <PopularItems />
   
   <CategoryItems categoryId = {categoryButtonState.value} />
 
