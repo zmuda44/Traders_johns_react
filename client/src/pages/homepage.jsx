@@ -1,21 +1,18 @@
 import { useState, useEffect } from "react";
 import WatchedItems from '../components/Watched-items'
 import CategoryItems from '../components/Category-items'
+import AllItems from '../components/All-items'
+import PopularItems from '../components/Popular-items'
 
 function Homepage () {
 
-const [productsDisplayState, setProductsDisplayState] = useState([])
-//   productName: "",
-//   description: "",
-//   price: "",
-//   category_id: "",
-//   user_id: ""
-// })
+const [UserDisplayState, setUserDisplayState] = useState([])
+
 
 useEffect(() => {
-  const getProductsData = async () => {
+  const getUserData = async () => {
       try {
-      const response = await fetch(`/api/products`, {
+      const response = await fetch(`/api/users/me`, {
         headers: {
           'Content-Type': 'application/json',
         }          
@@ -27,14 +24,14 @@ useEffect(() => {
 
       const productsData = await response.json()
      
-      setProductsDisplayState(productsData)
+      setUserDisplayState(UserData)
 
     } catch (err) {
       console.error(err);
     }
   };
 
-      getProductsData();
+      getUserData();
   }, []);
 
   const [categoryButtonState, setCategoryButtonState] = useState({value: 1})
@@ -89,6 +86,8 @@ return (
 
 <div className="main-homepage-content">
 
+  <PopularItems />
+
   <WatchedItems />
   
   <CategoryItems categoryId = {categoryButtonState.value} />
@@ -108,6 +107,19 @@ return (
 }
 
 export default Homepage
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {/* 
 <div class="homepage-main">

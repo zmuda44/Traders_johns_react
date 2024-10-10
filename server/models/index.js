@@ -45,11 +45,25 @@ Product.belongsToMany(User, {
   foreignKey: 'product_id',
 });
 
-Product.belongsToMany(User, {
-  through: {model: WatchedProduct, unique: false},
-  as: 'users_purchasing',
+// Define associations for join tables (WatchedProduct and PurchasedProduct)
+WatchedProduct.belongsTo(Product, {
   foreignKey: 'product_id',
 });
+
+WatchedProduct.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+PurchasedProduct.belongsTo(Product, {
+  foreignKey: 'product_id',
+});
+
+PurchasedProduct.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+
+
 
 module.exports = { 
   Product,

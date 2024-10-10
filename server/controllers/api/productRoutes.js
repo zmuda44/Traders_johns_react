@@ -69,6 +69,49 @@ router.post('/:product_id/purchased', async (req, res) => {
   }
 })
 
+router.get('/popular', async (req, res) => {
+
+  try {
+    const popularProductsData = await WatchedProduct.findAll({
+      include: [{ 
+        model: Product,
+        attributes: ['product_name', 'description', 'price', 'category_id'],
+      }]
+    })
+
+    res.json(popularProductsData)
+  }
+
+  catch(err) {
+    console.log(err)
+  }
+
+
+  // try {
+  //   const popularProductsData = await Product.findAll({
+  //   })
+  // }
+  // catch (err) {
+  //   console.log(err)
+  // }
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //originally from home route
 router.get('/', async (req, res) => {
   console.log("path hit")
