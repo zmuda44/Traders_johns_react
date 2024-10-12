@@ -10,6 +10,7 @@ import Home from './pages/homepage'
 import Profile from './pages/profile'
 import Checkout from './pages/checkout'
 import Login from './pages/login'
+import UserPage from './pages/user-page'
 
 
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/user/:userId',
+        element: <UserPage />
       },
     ],
   },

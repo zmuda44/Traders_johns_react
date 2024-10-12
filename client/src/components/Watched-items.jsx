@@ -5,6 +5,7 @@ function WatchedItems () {
 const [productsDisplayState, setProductsDisplayState] = useState([])
 
 
+
 useEffect(() => {
   const getProductsData = async () => {
       try {
@@ -28,7 +29,7 @@ useEffect(() => {
   };
 
       getProductsData();
-  }, []);
+  }, []);  
 
 return (
 
@@ -43,7 +44,7 @@ return (
         <h3 className="product-name">{product.product_name}</h3>
         <p className="product-description">{product.description}</p>
         <p className="product-price">$ {product.price} </p>
-        <img src="" />
+        <img src={`./public/images/${product.category.category_name}.jpg`} />
       </div>
     ))}
 

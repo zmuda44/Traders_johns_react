@@ -1,14 +1,18 @@
 import { useState } from "react";
-
+import PopularItems from '../components/Popular-items.jsx'
 
 function Profile () {
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+
 
   const [productFormState, setProductFormState] = useState({
     product_name: "",
     description: "",
     price: "",
-    category_id: "",
-    username: "",
+    category_id: 1,
+    // username: "",
   })
 
   const handleProductChange = (event) => {
@@ -48,13 +52,21 @@ function Profile () {
 
 
 
+  
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      setImage(file);
+      setPreview(URL.createObjectURL(file)); // Preview the selected image
+    };
+
+
 return (
 <div className="profile-section">
   <h1>Welcome, !</h1>
 
 
   <div className="profile-section-block">
-    <h3>All products currently available</h3>
+    <h3>Popular Items</h3>
     <div className="card-container">
 
       <div className="card" value="">
@@ -91,41 +103,63 @@ return (
         <label htmlFor="product-name">Product name:</label>
         <input type="text" 
         id="product-name" 
-        name="product_name" />
+        name="product_name" 
         value={productFormState.product_name}
         onChange={handleProductChange}
+        />
       </div>
       <div className="form-section">
         <label htmlFor="product-description">Product Description</label>
-        <textarea className="form-input" 
-        id="product-description" 
-        name="description">
-        value={productFormState.description}
-        onChange={handleProductChange}
-        </textarea>
+        <textarea
+              className="form-input"
+              id="product-description"
+              name="description"
+              value={productFormState.description}
+              onChange={handleProductChange}
+            />
       </div>
       <div className="form-section">
         <label htmlFor="price">Price</label>
-        <input className="form-input" id="price" name="price"></input>
+        <input className="form-input" 
+        id="price"
+        name="price"
+        value={productFormState.price}
+        onChange={handleProductChange}
+        />
       </div>
+
+      <div className="form-section">
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+      {preview && <img src={preview} alt="Preview" width="200" />}
+      </div>
+
       <div className="form-section">
         <label htmlFor="product-category">Category</label>
-        <select id="product-category" name="product-category">
-          <option value="1">Produce</option>
-          <option value="2">Meat</option>
-          <option value="3">Seafood</option>
-          <option value="4">Dairy</option>
-          <option value="5">Snacks</option>
-          <option value="6">Dry-Goods</option>
-          <option value="7">Canned-Goods</option>
-          <option value="8">Condiments</option>
-          <option value="9">Bakery</option>
-          <option value="10">Cereal</option>
-          <option value="11">Frozen-Goods</option>
+        <select id="product-category" name="category_id" onChange={handleProductChange} name="product-category">
+          <option
+           value="1" >Produce</option>
+          <option
+           value="2" >Meat</option>
+          <option
+           value="3" >Seafood</option>
+          <option
+           value="4" >Snacks</option>
+          <option
+           value="6">Dry-Goods</option>
+          <option
+           value="7">Canned-Goods</option>
+          <option
+           value="8">Condiments</option>
+          <option
+           value="9">Bakery</option>
+          <option
+           value="10">Cereal</option>
+          <option
+           value="11">Frozen-Goods</option>
         </select>
       </div>
       <div className="form-section">
-        <button className="product-create-btn">List a new product</button>
+        <button className="product-create-btn" onClick={handleProductFormSubmit}>List a new product</button>
       </div>
     </form>
   </div>

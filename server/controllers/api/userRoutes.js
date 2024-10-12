@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Product, WatchedProduct } = require('../../models');
+const { User, Product, WatchedProduct, Category } = require('../../models');
 
 router.get('/me', async (req, res) => {
 
@@ -98,14 +98,21 @@ router.get('/products/watched', async (req, res) => {
   console.log(userId)
 
   const user = await User.findByPk(userId, {
+    attributes: { exclude: ['password'] },
     include: [{
-      model: Product, // Assuming the Product model is related to User through WatchedProducts
+      model: Product,
       through: WatchedProduct, // Specifies the join table
-      as: 'user_watched_products', // Alias for the products user has watched
-    //   include: [{
-    //     model: Category,
-    //     attributes: ['category_name'],
-    // }]
+      as: 'user_watched_products', // Alias for the products the user has watched
+      include: [
+        {
+          model: Category,
+          attributes: ['category_name'], // Fetch the category name
+        },
+        {
+          model: User,
+          attributes: ['username'], // Fetch the username of the product owner
+        }
+      ]
     }]
   });
 
@@ -123,13 +130,8 @@ router.post('/products/:product_id/watched', async (req, res) => {
     else {
       userId = req.session.user_id
     }
-
-
-
    
-    const productId = req.params.product_id 
-
-    console.log(productId)
+    const productId = req.params.product_id
 
     const user = await User.findByPk(userId);
     if (!user) {
@@ -138,6 +140,9 @@ router.post('/products/:product_id/watched', async (req, res) => {
  
     // Find the product by ID
     const product = await Product.findByPk(productId);
+
+    console.log(product)
+
     if (product == undefined) {
       console.log("no product")
       return res.json('Product not found');
@@ -157,6 +162,33 @@ router.post('/products/:product_id/watched', async (req, res) => {
 
   }
 })
+
+router.get('/seller/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId; // Extract userId from the request parameters
+
+    const user = await User.findByPk(userId, {
+      attributes: { exclude: ['password'] }, // Exclude password from the result
+      include: [{
+        model: Product,        
+        attributes: ['product_name', 'description', 'price', 'image', 'category_id'], // Include product attributes
+        include: [{ // Correctly include Category within Product
+          model: Category,
+          attributes: ['category_name']
+        }]
+      }]
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' }); // Handle case if user doesn't exist
+    }
+
+    res.json(user); // Send the user data in the response
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Server error', error: err });
+  }
+});
 
 module.exports = router;
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 function PopularItems () {
 
   const [productsDisplayState, setProductsDisplayState] = useState([])  
@@ -20,8 +21,6 @@ function PopularItems () {
         const productsData = await response.json()
        
         setProductsDisplayState(productsData)
-
-        console.log(productsData[0].product)
   
       } catch (err) {
         console.error(err);
@@ -45,7 +44,7 @@ function PopularItems () {
           <h3 className="product-name">{watchedProduct.product.product_name}</h3>
           <p className="product-description">{watchedProduct.product.description}</p>
           <p className="product-price">$ {watchedProduct.product.price} </p>
-          <img src="" />
+          <img src={`./public/images/${watchedProduct.product.category.category_name}.jpg`} />
         </div>
       ))}
   

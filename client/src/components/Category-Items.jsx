@@ -18,7 +18,7 @@ useEffect(() => {
       }     
 
       const productsData = await response.json()
-     
+
       setProductsDisplayState(productsData)
 
     } catch (err) {
@@ -28,6 +28,7 @@ useEffect(() => {
 
       getProductsData();
   }, [props.categoryId]);
+
 
 
 return (
@@ -43,7 +44,15 @@ return (
         <h3 className="product-name">{product.product_name}</h3>
         <p className="product-description">{product.description}</p>
         <p className="product-price">$ {product.price} </p>
-        <img src="" />
+        <img src={`./public/images/${product.category.category_name}.jpg`} />
+        <p className="product-creator">
+        Sold by: 
+        {product.user?.username ? (
+        <a href={`/user/${product.user_id}`} className="profile-link">
+        {product.user.username}
+        </a>
+       ) : "Trader Jons"}
+        </p>
       </div>
     ))}
 

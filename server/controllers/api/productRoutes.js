@@ -4,11 +4,16 @@ const { Product, User, Category, WatchedProduct, PurchasedProduct } = require('.
 // router.post('/', withAuth, async (req, res) => {
 
 router.post('/', async (req, res) => {
+  
+
+  const newProductData = { ...req.body, user_id: req.session.user_id }
+  console.log(newProductData)
+
   try {
     if (!req.body) {
       return res.json("error")
     }
-      const newProduct = await Product.create({ ...req.body });
+      const newProduct = await Product.create(newProductData);
     
   
       res.status(200).json(newProduct);
@@ -21,12 +26,19 @@ router.post('/', async (req, res) => {
 router.get('/category/:category_id', async (req,res) => {
   try {
     console.log("new route hit")
-      let products = await Product.findAll({ where: {category_id: req.params.category_id}, 
-        include: [{ 
+    let products = await Product.findAll({ 
+      where: { category_id: req.params.category_id }, 
+      include: [
+        { 
           model: Category,
-          attributes: ['category_name'],
-        }]
-      })
+          attributes: ['category_name']
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    });
       products = products.map(product => product.get({plain:true }));
 
       res.json(products)
@@ -76,6 +88,10 @@ router.get('/popular', async (req, res) => {
       include: [{ 
         model: Product,
         attributes: ['product_name', 'description', 'price', 'category_id'],
+        include: [{
+          model: Category,
+          attributes: ['category_name'],
+        }]
       }]
     })
 
