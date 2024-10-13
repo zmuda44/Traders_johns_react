@@ -5,24 +5,26 @@ router.get('/me', async (req, res) => {
 
     try {
 
-        if (!req.session.user_id) {
-        return res.status(401).json({ message: 'Not logged in' });
-      }
+        // if (!req.session.user_id) {
+        // return res.status(401).json({ message: 'Not logged in' });
+        // }
   
-      const userData = await User.findByPk(req.session.user_id, {
+      const userData = await User.findByPk(1, {
           attributes: { exclude: ['password'] },
-          // include: [
-          //     { model: Product },
-          //     { model: Product, through: WatchedProduct, as: 'user_watched_products' },
-
-          // ]     
+          include: [{ 
+            model: Product,
+            attributes: ['product_name', 'description', 'price', 'category_id'],
+            include: {
+              model: Category,
+            }
+          }]     
       });   
       
       if (!userData) {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      res.json({username: userData.username})
+      res.json(userData)
 
 
 

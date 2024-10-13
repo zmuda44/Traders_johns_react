@@ -10,7 +10,9 @@ import Home from './pages/homepage'
 import Profile from './pages/profile'
 import Checkout from './pages/checkout'
 import Login from './pages/login'
-import UserPage from './pages/user-page'
+import SellerPage from './pages/seller-page'
+import SellerDashboard from './pages/seller-dashboard'
+import EditItem from './pages/edit-item.jsx'
 
 
 
@@ -39,7 +41,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/user/:userId',
-        element: <UserPage />
+        element: <SellerPage />
+      },
+      {
+        path: '/user/seller-dashboard',
+        element: <SellerDashboard />
+      },
+      {
+        path: '/user/:productId/edit',
+        element: <EditItem />
       },
     ],
   },
