@@ -1,11 +1,39 @@
-import { useState } from "react"; 
+import { useState, useEffect } from "react"; 
 import { useNavigate } from "react-router-dom"; // Import useNavigate if you're using react-router
 
 function ProductCard ({ product }) {
+  const [userState, setUserState] = useState({ userName: "" })
   const [watchedState, setWatchedState] = useState({});
   const navigate = useNavigate(); // Assuming you're using react-router for navigation
 
- console.log(product)
+  useEffect(() => {
+    const getUserData = async () => {
+        try {
+        const response = await fetch(`/api/users/me`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }          
+        })
+  
+        if (!response.ok) {
+          throw new Error('something went wrong!');
+        }     
+  
+        const user = await response.json()
+       
+        setUserState({
+          userName: user.username || ""
+        });
+  
+        
+  
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+        getUserData();
+    }, []);
 
   const handleWatchedSubmit = async (args) => {
 
@@ -47,8 +75,10 @@ function ProductCard ({ product }) {
           </a>
         ) : "Trader Jons"}
       </p>
-      <button onClick={() => handleWatchedSubmit(product.id)}>Add to watchlist</button>
-        <p>{product.id}</p>
+      {userState.userName && (
+        <button onClick={() => handleWatchedSubmit(product.id)}>Add to watchlist</button>
+      )}
+     
     </div>
   );
 }
