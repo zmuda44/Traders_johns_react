@@ -43,14 +43,14 @@ return (
 
     {productsDisplayState.map((product) => (
 
-    <a href={`/users/${product.id}/edit`}>
+
       <div key={product.id} className="card" value="">
         <h3 className="product-name">{product.product_name}</h3>
         <p className="product-description">{product.description}</p>
         <p className="product-price">$ {product.price} </p>
         <img src={`./public/images/${product.category.category_name}.jpg`} />
       </div>
-      </a>
+
     ))}
 
 

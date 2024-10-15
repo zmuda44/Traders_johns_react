@@ -9,11 +9,11 @@ router.get('/me', async (req, res) => {
         // return res.status(401).json({ message: 'Not logged in' });
         // }
   
-      const userData = await User.findByPk(1, {
+      const userData = await User.findByPk(req.session.user_id, {
           attributes: { exclude: ['password'] },
           include: [{ 
             model: Product,
-            attributes: ['product_name', 'description', 'price', 'category_id'],
+            attributes: ['id','product_name', 'description', 'price', 'category_id'],
             include: {
               model: Category,
             }
@@ -96,8 +96,6 @@ router.get('/products/watched', async (req, res) => {
   console.log(req.session.user_id)
 
   let userId = req.session.user_id || 1;
-
-  console.log(userId)
 
   const user = await User.findByPk(userId, {
     attributes: { exclude: ['password'] },
@@ -189,6 +187,105 @@ router.get('/seller/:userId', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Server error', error: err });
+  }
+});
+
+router.get('/product/:productId', async (req, res) => {
+  try {
+    // Extract productId from the request parameters
+    const { productId } = req.params;
+
+    // Fetch the product by its primary key
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: Category,  // Correct syntax for including associated model
+        attributes: ['category_name'],  // Correct spelling for 'attributes'
+      }
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Send the product data as a response
+    res.json(product);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.put('/product/:productId/edit', async (req, res) => {
+  try {
+    console.log(req.body);
+
+    // Extract productId from the request parameters
+    const { productId } = req.params;
+
+    // Fetch the product by its primary key
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: Category,  // Correct syntax for including associated model
+        attributes: ['category_name'],  // Correct spelling for 'attributes'
+      }
+    });
+    
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    await product.update({
+      product_name: req.body.product_name || product.product_name,
+      description: req.body.description || product.description,
+      price: req.body.price || product.price,
+      categoryId: req.body.category_id || product.categoryId,
+      image: req.body.image || product.image,
+    });
+
+    const updatedProduct = await Product.findByPk(productId, {
+      include: {
+        model: Category,
+        attributes: ['category_name'],
+      }
+    });
+
+    // Send the product data as a response
+    res.json(product);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.delete('/product/:productId/edit', async (req, res) => {
+  try {
+    console.log(req.body);
+
+    // Extract productId from the request parameters
+    const { productId } = req.params;
+
+    // Fetch the product by its primary key
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: Category,  // Correct syntax for including associated model
+        attributes: ['category_name'],  // Correct spelling for 'attributes'
+      }
+    });
+    
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    await product.destroy();
+    
+    // Send the product data as a response
+    res.json(product);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

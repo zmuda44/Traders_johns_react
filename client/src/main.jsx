@@ -12,7 +12,7 @@ import Checkout from './pages/checkout'
 import Login from './pages/login'
 import SellerPage from './pages/seller-page'
 import SellerDashboard from './pages/seller-dashboard'
-import EditItem from './pages/edit-item.jsx'
+import EditProduct from './pages/edit-product.jsx'
 
 
 
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
         element: <SellerDashboard />
       },
       {
-        path: '/user/:productId/edit',
-        element: <EditItem />
+        path: '/users/product/:productId',
+        element: <EditProduct />
       },
     ],
   },

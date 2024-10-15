@@ -6,10 +6,11 @@ import CreateProduct from '../components/Create-product.jsx'
 
 function SellerDashboard () {
   
+  const [userDisplayState, setUserDisplayState ] = useState([])
   const [productsDisplayState, setProductsDisplayState] = useState([])
 
   useEffect(() => {
-    const getProductsData = async () => {
+    const getUserData = async () => {
         try {
         const response = await fetch(`/api/users/me/`, {
           headers: {
@@ -23,9 +24,8 @@ function SellerDashboard () {
   
         const userData = await response.json()
         const productsData = userData.products
-  
-       
-       
+
+        setUserDisplayState(userData)      
         setProductsDisplayState(productsData)
   
       } catch (err) {
@@ -33,28 +33,29 @@ function SellerDashboard () {
       }
     };
   
-        getProductsData();
+        getUserData();
     }, []);  
 
 
-  
+  console.log(productsDisplayState)
 
 return (
-<div className="card-container">
-{productsDisplayState.map((product) => (
-
-  <div key={product.id} className="card" value="">
-    <h3 className="product-name">{product.product_name}</h3>
-    <p className="product-description">{product.description}</p>
-    <p className="product-price">$ {product.price} </p>
-    <img src={`./public/images/${product.category.category_name}.jpg`} />
+<div>
+  <div>You have reached {userDisplayState.username} Seller Dashboard</div>
+  <div>Manage your proudcts below</div>
+  <div className="card-container">
+  {productsDisplayState.map((product) => (
+    <a href={`/users/product/${product.id}`}>
+    <div key={product.id} className="card" value="">
+      <h3 className="product-name">{product.product_name}</h3>
+      <p className="product-description">{product.description}</p>
+      <p className="product-price">$ {product.price} </p>
+      <img src={`./public/images/${product.category.category_name}.jpg`} />
+    </div>
+    </a>
+  ))}
   </div>
-
-))}
-
-
 </div>
-
 )}
 
 export default SellerDashboard
