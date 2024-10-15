@@ -5,8 +5,6 @@ import UserItems from '../components/User-items.jsx'
 import CreateProduct from '../components/Create-product.jsx'
 
 function Profile () {
-  
-
 
 return (
 <div className="profile-section">
@@ -27,8 +25,6 @@ return (
     <h3>Current Watched Products:</h3>
     <WatchedItems />
   </div>
-
-
 
   <div className="profile-section-block">
     <h3>Quick Create Product or <a href="/user/seller-dashboard">Visit Seller Dashboard</a></h3>

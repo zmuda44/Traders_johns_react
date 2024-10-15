@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ProductCard from './Product-Card';
 
 function CategoryItems (props) {
 
@@ -33,27 +34,16 @@ useEffect(() => {
 
 return (
 
-<div id="watched-items">
+<div id="category-items">
 
   <h3>Items in Category</h3>
   <div className="card-container">
 
     {productsDisplayState.map((product) => (
-
-      <div key={product.id} className="card" value="">
-        <h3 className="product-name">{product.product_name}</h3>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">$ {product.price} </p>
-        <img src={`./public/images/${product.category.category_name}.jpg`} />
-        <p className="product-creator">
-        Sold by: 
-        {product.user?.username ? (
-        <a href={`/user/${product.user_id}`} className="profile-link">
-        {product.user.username}
-        </a>
-       ) : "Trader Jons"}
-        </p>
-      </div>
+      <ProductCard 
+      key={product.product_id}
+      product={product}
+      />
     ))}
 
 

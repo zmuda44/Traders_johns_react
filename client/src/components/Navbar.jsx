@@ -71,7 +71,7 @@ return (
         <a className="logout-link" onClick={handleLogout}>Logout</a>
         </>
         ) : (
-        <a href="/login" className="login-signup">Login or Signup here to begin buying and selling</a>
+        <a href="/login" className="login-signup"><p>Login or Signup here <br />to begin buying and selling</p></a>
         )}
 
       </div>

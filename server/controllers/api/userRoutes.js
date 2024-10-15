@@ -4,11 +4,9 @@ const { User, Product, WatchedProduct, Category } = require('../../models');
 router.get('/me', async (req, res) => {
 
     try {
-
-        // if (!req.session.user_id) {
-        // return res.status(401).json({ message: 'Not logged in' });
-        // }
-  
+        if (!req.session.user_id) {
+        return res.status(401).json({ message: 'Not logged in' });
+        }  
       const userData = await User.findByPk(req.session.user_id, {
           attributes: { exclude: ['password'] },
           include: [{ 
@@ -25,8 +23,6 @@ router.get('/me', async (req, res) => {
       }
 
       res.json(userData)
-
-
 
     } catch (err) {
         res.status(500).json(err);

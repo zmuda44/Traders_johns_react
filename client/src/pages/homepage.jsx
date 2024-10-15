@@ -40,73 +40,59 @@ useEffect(() => {
     setCategoryButtonState({value: categoryId})
   };  
 
-  console.log(UserDisplayState)
-
 return (
 <div className="homepage-main">
 
+  <aside className="categories">
+    <h2>Categories</h2>
+    <button className="category-names" value="1" onClick={handleCategoryClick}>
+    Produce
+    </button>
+    <button className="category-names" value="2" onClick={handleCategoryClick}>
+      Meat
+    </button>
+    <button className="category-names" value="3" onClick={handleCategoryClick}>
+      Seafood
+    </button>
+    <button className="category-names" value="4" onClick={handleCategoryClick}>
+      Dairy
+    </button>
+    <button className="category-names" value="5" onClick={handleCategoryClick}>
+      Snacks
+    </button>
+    <button className="category-names" value="6" onClick={handleCategoryClick}>
+      Dry-Goods
+    </button>
+    <button className="category-names" value="7" onClick={handleCategoryClick}>
+      Canned-Goods
+    </button>
+    <button className="category-names" value="8" onClick={handleCategoryClick}>
+      Condiments
+    </button>
+    <button className="category-names" value="9" onClick={handleCategoryClick}>
+      Bakery
+    </button>
+    <button className="category-names" value="10" onClick={handleCategoryClick}>
+      Cereal
+    </button>
+    <button className="category-names" value="11" onClick={handleCategoryClick}>
+      Frozen-Goods
+    </button>
+  </aside>  
 
-<aside className="categories">
-  <h2>Categories</h2>
-  <button className="category-names" value="1" onClick={handleCategoryClick}>
-  Produce
-  </button>
-  <button className="category-names" value="2" onClick={handleCategoryClick}>
-    Meat
-  </button>
-  <button className="category-names" value="3" onClick={handleCategoryClick}>
-    Seafood
-  </button>
-  <button className="category-names" value="4" onClick={handleCategoryClick}>
-    Dairy
-  </button>
-  <button className="category-names" value="5" onClick={handleCategoryClick}>
-    Snacks
-  </button>
-  <button className="category-names" value="6" onClick={handleCategoryClick}>
-    Dry-Goods
-  </button>
-  <button className="category-names" value="7" onClick={handleCategoryClick}>
-    Canned-Goods
-  </button>
-  <button className="category-names" value="8" onClick={handleCategoryClick}>
-    Condiments
-  </button>
-  <button className="category-names" value="9" onClick={handleCategoryClick}>
-    Bakery
-  </button>
-  <button className="category-names" value="10" onClick={handleCategoryClick}>
-    Cereal
-  </button>
-  <button className="category-names" value="11" onClick={handleCategoryClick}>
-    Frozen-Goods
-  </button>
-</aside>
+  <div className="main-homepage-content">  
 
-
-
-<div className="main-homepage-content">
-
-  
-
-  
+  {!UserDisplayState &&  (
+    <div className="homepage-signout">
+      <h3>You are signed out</h3>
+      <h3>Signup or Login to begin buying and selling</h3>
+    </div>
+  )}
 
   {UserDisplayState && <WatchedItems />}
-
-  <PopularItems />
-  
+  <PopularItems />  
   <CategoryItems categoryId = {categoryButtonState.value} />
-
-
-
-  <div className="popular-items">
-    <h3>Popular Items</h3>
-
   </div>
-</div>
-
-
-
 </div>
 )
 }
