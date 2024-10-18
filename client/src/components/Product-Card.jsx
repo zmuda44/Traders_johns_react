@@ -39,30 +39,7 @@ function ProductCard ({ product }) {
         getUserData();
     }, []);
 
-  const handleWatchedSubmit = async (args) => {
-    console.log(args)
-    console.log(userState)
-
-    try {
-      const response = await fetch(`/api/users/products/${product.id}/watched`, { // Replace `yourUserId` with actual user ID
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // body: JSON.stringify({ productId: product.product_id }), // Send the product ID in the body
-      });
-
-      if (response.ok) {
-        // Optionally handle success, such as updating UI state or displaying a message
-        console.log("Product added to watchlist successfully.");
-        // Optionally navigate or show a success message
-      } else {
-        console.log("Failed to add product to watchlist.");
-      }  
-    } catch (e) {
-      console.error("Error:", e);
-    }
-  };
+ 
 
   return (
     <div key={product.id} className="card">
@@ -78,9 +55,8 @@ function ProductCard ({ product }) {
           </a>
         ) : "Trader Jons"}
       </p>
-   
-        <button onClick={() => handleWatchedSubmit(product.id)}>
-        {userState.userName ? "Remove from watchlist" : "Add to watchlist" }</button>
+        {userState.userName && <WatchedButton
+        id={product.id} />} 
 
     </div>
   );
