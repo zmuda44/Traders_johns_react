@@ -15,7 +15,12 @@ router.get('/me', async (req, res) => {
             include: {
               model: Category,
             }
-          }]     
+          },
+        {
+            model: Product,
+            through: WatchedProduct, // Specifies the join table
+            as: 'user_watched_products',
+        }]     
       });   
       
       if (!userData) {

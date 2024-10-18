@@ -1,42 +1,59 @@
-import { useState } from "react";
-import PopularItems from '../components/Popular-items.jsx'
-import WatchedItems from '../components/Watched-items.jsx'
-import UserItems from '../components/User-items.jsx'
-import CreateProduct from '../components/Create-product.jsx'
+import { useState, useEffect } from "react";
+import UserProfile from '../components/User-profile'
 
 function Profile () {
 
+  const [userState, setUserState] = useState({ userName: "" })
+
+  useEffect(() => {
+    // Need this to know if you are signed out or not
+    const getUserData = async () => {
+        try {
+        const response = await fetch(`/api/users/me`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }          
+        })
+  
+        if (!response.ok) {
+          throw new Error('something went wrong!');
+        }     
+  
+        const user = await response.json()
+       
+        setUserState({
+          userName: user.username || ""
+        });
+  
+        
+  
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+        getUserData();
+    }, []);
+
+
+
 return (
-<div className="profile-section">
-  <h1>Welcome, !</h1>
+<>
+{!userState.userName ? (
+  <div>You are currently not logged in. <a href="/login"> Click here to login.</a></div>
+
+) : (
+  <UserProfile 
+  user={userState}
+  />
+)  
+}
 
 
-  <div className="profile-section-block">
-    <h3>Popular Items</h3>
-    <PopularItems />
-  </div>
+</>
 
-  <div className="profile-section-block">
-    <h3>Current User Products:</h3>
-    <UserItems />
-  </div>
-
-  <div className="profile-section-block">
-    <h3>Current Watched Products:</h3>
-    <WatchedItems />
-  </div>
-
-  <div className="profile-section-block">
-    <h3>Quick Create Product or <a href="/user/seller-dashboard">Visit Seller Dashboard</a></h3>
-  </div>
-
-  <div className="profile-section-block">
-    <h3>User Dashboard</h3>
-    <CreateProduct />
-  </div>
 
   
-</div>  
 )}
 
 export default Profile

@@ -28,13 +28,14 @@ function PopularItems() {
     getProductsData();
   }, []);
 
+
   return (
     <div id="popular-items">
       <h3>Popular Items</h3>
       <div className="card-container">
         {productsDisplayState.map((product) => (
           <ProductCard 
-            key={product.product_id}    
+            key={`p${product.id}`}    
             product={product.product}    
           />
         ))}

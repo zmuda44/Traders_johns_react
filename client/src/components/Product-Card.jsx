@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"; 
-import { useNavigate } from "react-router-dom"; // Import useNavigate if you're using react-router
+import { useNavigate } from "react-router-dom";
+// import watchedItems from './Watched-items' // Import useNavigate if you're using react-router
 
 function ProductCard ({ product }) {
   const [userState, setUserState] = useState({ userName: "" })
@@ -7,6 +8,7 @@ function ProductCard ({ product }) {
   const navigate = useNavigate(); // Assuming you're using react-router for navigation
 
   useEffect(() => {
+    // Need this to know if you are signed out or not
     const getUserData = async () => {
         try {
         const response = await fetch(`/api/users/me`, {
@@ -20,6 +22,8 @@ function ProductCard ({ product }) {
         }     
   
         const user = await response.json()
+
+        console.log(user)
        
         setUserState({
           userName: user.username || ""
@@ -36,9 +40,8 @@ function ProductCard ({ product }) {
     }, []);
 
   const handleWatchedSubmit = async (args) => {
-
-
     console.log(args)
+    console.log(userState)
 
     try {
       const response = await fetch(`/api/users/products/${product.id}/watched`, { // Replace `yourUserId` with actual user ID
@@ -75,10 +78,10 @@ function ProductCard ({ product }) {
           </a>
         ) : "Trader Jons"}
       </p>
-      {userState.userName && (
-        <button onClick={() => handleWatchedSubmit(product.id)}>Add to watchlist</button>
-      )}
-     
+   
+        <button onClick={() => handleWatchedSubmit(product.id)}>
+        {userState.userName ? "Remove from watchlist" : "Add to watchlist" }</button>
+
     </div>
   );
 }

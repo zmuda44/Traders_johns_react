@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import ProductCard from './Product-Card'
 
 function WatchedItems () {
 
 const [productsDisplayState, setProductsDisplayState] = useState([])
+
+
 
 
 
@@ -27,33 +30,38 @@ useEffect(() => {
       console.error(err);
     }
   };
-
       getProductsData();
   }, []);  
+
+
 
 return (
 
 <div id="watched-items">
-
-  <h3>Currently Watched Items</h3>
   <div className="card-container">
-
     {productsDisplayState.map((product) => (
-
-      <div key={product.id} className="card" value="">
-        <h3 className="product-name">{product.product_name}</h3>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">$ {product.price} </p>
-        <img src={`./public/images/${product.category.category_name}.jpg`} />
-      </div>
+      <ProductCard
+        key={product.id} 
+        product={product}    
+    />
     ))}
-
-
   </div>
-
 </div>
   
 )
 }
 
 export default WatchedItems
+
+
+
+{/* <div className="card-container">
+{productsDisplayState.map((product) => (
+  <div key={product.id} className="card" value="">
+    <h3 className="product-name">{product.product_name}</h3>
+    <p className="product-description">{product.description}</p>
+    <p className="product-price">$ {product.price} </p>
+    <img src={`./public/images/${product.category.category_name}.jpg`} />
+  </div>
+))}
+</div> */}

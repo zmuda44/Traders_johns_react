@@ -21,6 +21,7 @@ WatchedProduct.init(
     },
     product_id: {
       type: DataTypes.INTEGER,
+      unique: true,
       references: {
         model: 'product',
         key: 'id',
