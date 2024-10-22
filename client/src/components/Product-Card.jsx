@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"; 
 import { useNavigate } from "react-router-dom";
 // import watchedItems from './Watched-items' // Import useNavigate if you're using react-router
+import WatchedButton from './Watched-button'
 
 function ProductCard ({ product }) {
   const [userState, setUserState] = useState({ userName: "" })
@@ -22,8 +23,6 @@ function ProductCard ({ product }) {
         }     
   
         const user = await response.json()
-
-        console.log(user)
        
         setUserState({
           userName: user.username || ""

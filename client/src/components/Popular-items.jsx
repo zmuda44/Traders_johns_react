@@ -30,7 +30,7 @@ function PopularItems() {
 
 
   return (
-    <div id="popular-items">
+    <div id="popular-items" className="product-section">
       <h3>Popular Items</h3>
       <div className="card-container">
         {productsDisplayState.map((product) => (

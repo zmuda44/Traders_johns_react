@@ -1,66 +1,71 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 
-
-function WatchedButton ({ id }) {
-
-  console.log(id)
-
-  const [productsDisplayState, setProductsDisplayState] = useState([])
+function WatchedButton({ id }) {
+  const [watchedState, setWatchedState] = useState(false); // Initially assume it's not watched
 
   useEffect(() => {
     const getProductsData = async () => {
-        try {
+      try {
         const response = await fetch(`/api/users/products/watched`, {
           headers: {
-            'Content-Type': 'application/json',
-          }          
-        })
-  
+            "Content-Type": "application/json",
+          },
+        });
+
         if (!response.ok) {
-          throw new Error('something went wrong!');
-        }     
-  
-        const productsData = await response.json()
-       
-        setProductsDisplayState(productsData.user_watched_products)
-  
+          throw new Error("something went wrong!");
+        }
+
+        const productsData = await response.json();
+
+        // Check if the current product (with `id`) is in the user's watched products
+        const isWatched = productsData.user_watched_products.some(
+          (product) => product.id === id
+        );
+        setWatchedState(isWatched); // Set the initial watched state
       } catch (err) {
         console.error(err);
       }
     };
-        getProductsData();
-    }, []);    
-  
-  const handleWatchedSubmit = async (args) => {
-    console.log(args)
-    console.log(userState)
 
+    getProductsData();
+  }, [id]); // Run the effect when the component mounts or when `id` changes
+
+  const handleWatchedSubmit = async () => {
     try {
-      const response = await fetch(`/api/users/products/${product.id}/watched`, { // Replace `yourUserId` with actual user ID
-        method: 'POST',
+      const method = watchedState ? "DELETE" : "POST"; // Use DELETE if removing, POST if adding
+      const response = await fetch(`/api/users/products/${id}/watched`, {
+        method: method,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        // body: JSON.stringify({ productId: product.product_id }), // Send the product ID in the body
       });
 
       if (response.ok) {
-        // Optionally handle success, such as updating UI state or displaying a message
-        console.log("Product added to watchlist successfully.");
-        // Optionally navigate or show a success message
+        // Toggle the watched state after a successful API call
+        setWatchedState(!watchedState);
+        console.log(
+          watchedState
+            ? "Product removed from watchlist successfully."
+            : "Product added to watchlist successfully."
+        );
       } else {
-        console.log("Failed to add product to watchlist.");
-      }  
+        console.log(
+          watchedState
+            ? "Failed to remove product from watchlist."
+            : "Failed to add product to watchlist."
+        );
+      }
     } catch (e) {
       console.error("Error:", e);
     }
   };
 
-  console.log(productsDisplayState)
-
   return (
-    <button onClick={() => handleWatchedSubmit(product.id)}>
-    {!watchedState ? "Add to Watchlist" : "Remove from Watchlist" }</button>
-  )
-
+    <button onClick={handleWatchedSubmit}>
+      {!watchedState ? "Add to Watchlist" : "Remove from Watchlist"}
+    </button>
+  );
 }
+
+export default WatchedButton;

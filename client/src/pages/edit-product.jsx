@@ -4,12 +4,41 @@ import EditProductForm from '../components/Edit-product-form'
 
 
 function EditItem () {
-  const [ sellerDisplayState, setSellerDisplayState ] = useState([])
+  const [ userDisplayState, setUserDisplayState ] = useState({})
   const [ productDisplayState, setProductDisplayState ] = useState({})
   const [ productFormState, setProductFormState ] = useState({})
   const [isEditing, setIsEditing] = useState(false); // State to show/hide the form
 
   const productId = useParams().productId
+
+  useEffect(() => {
+    const getUserData = async () => {
+        try {
+        const response = await fetch(`/api/users/me/`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }          
+        })
+  
+        if (!response.ok) {
+          throw new Error('something went wrong!');
+        }     
+  
+        const userData = await response.json()
+
+        setUserDisplayState(userData)      
+
+  
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+        getUserData();
+    }, []);  
+
+
+
 
   useEffect(() => {
     const getProductData = async () => {
@@ -39,29 +68,31 @@ function EditItem () {
     getProductData();
     }, [productId]);
 
-
-console.log(productFormState)
-
+console.log(productDisplayState.user_id)
+console.log(userDisplayState.id)
   return (
 
-    
-      <div className="product-container" >
-      <h3 className="product-name" >{productDisplayState.product_name}</h3>
-      <p className="product-description" >{productDisplayState.description}</p>
-      <p className="product-price" >$ {productDisplayState.price} </p>
-      {productDisplayState.category ? productDisplayState.category.category_name : "Category not available"}
-      {/* <img src={`./public/images/${productDisplayState.category}.jpg`} /> */}
       
-      <button onClick={() => setIsEditing(true)}>Update or delete product</button>
-      {isEditing && <EditProductForm
-      productId={productFormState.id}
-      originalProductFormState={productFormState} 
-
-      />}
-      
+  <div className="product-container" >
+    {userDisplayState.id == productDisplayState.user_id ? (
+      <div>
+        <h3 className="product-name">{productDisplayState.product_name}</h3>
+        <p className="product-description">{productDisplayState.description}</p>
+        <p className="product-price">$ {productDisplayState.price}</p>
+        {productDisplayState.category ? productDisplayState.category.category_name : "Category not available"}
+        {/* <img src={`./public/images/${productDisplayState.category}.jpg`} /> */}
+        
+        <button onClick={() => setIsEditing(true)}>Update or delete product</button>
+        
+        {isEditing && <EditProductForm
+          productId={productFormState.id}
+          originalProductFormState={productFormState} 
+        />}
       </div>
-
-
+    ) : (
+      <div>This is not your product, visit seller dashboard or login to view product</div>
+    )}
+  </div>
   )
 }
 

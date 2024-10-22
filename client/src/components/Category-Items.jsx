@@ -34,10 +34,10 @@ useEffect(() => {
 
 return (
 
-<div id="category-items">
+<div id="category-items" className="product-section">
 
   <h3>Items in Category</h3>
-  <div className="card-container">
+  <div className="card-container" >
 
     {productsDisplayState.map((product) => (
       <ProductCard 

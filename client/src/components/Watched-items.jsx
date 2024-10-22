@@ -37,7 +37,8 @@ useEffect(() => {
 
 return (
 
-<div id="watched-items">
+<div id="watched-items" className="product-section">
+<h3>Watched Items</h3>
   <div className="card-container">
     {productsDisplayState.map((product) => (
       <ProductCard

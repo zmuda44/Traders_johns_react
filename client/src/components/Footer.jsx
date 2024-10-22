@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 
 
-function Navbar () {
+function Footer () {
 
 const [userState, setUserState] = useState({ userName: "" })
 
@@ -56,7 +56,7 @@ useEffect(() => {
 
 return (
 <header>
-    <div className="container">
+    <div className="container title-container">
       <div className="branding-container">
         <a href="/"><h2>Welcome to Trader Johns'!</h2></a>
         <h3>the <span>e</span><span>b</span><span>a</span><span>y</span> of organic foods</h3>
@@ -67,8 +67,8 @@ return (
         {userState.userName ? (
         <>            
         <h4>Welcome, {userState.userName}</h4> 
-        <a href="/profile" ><p id="profile-link">Profile</p></a>
-        <p id="logout-btn" onClick={handleLogout}>Logout</p>
+        <a href="/profile" className="homepage-link">Profile</a>
+        <a className="logout-link" onClick={handleLogout}>Logout</a>
         </>
         ) : (
         <a href="/login" className="login-signup"><p>Login or Signup here <br />to begin buying and selling</p></a>
@@ -90,40 +90,10 @@ return (
 
 )}
 
-export default Navbar
+export default Footer
 
 
 
 
 
 
-
-
-
-
-// <header>
-//     <div className="container title-container">
-//       <div className="branding-container">
-//         <a href="/"><h2>Welcome to Trader Johns'!</h2></a>
-//         <h3>the <span>e</span><span>b</span><span>a</span><span>y</span> of organic foods</h3>
-//       </div>
-
-//       <div className="header-link-container">
-//         {{#if logged_in}}
-//         <h4>Welcome </h4>
-//         <a href="/profile" className="homepage-link">Profile</a> 
-//         <a class="logout-link">Logout</a>
-//         {{else}}
-//         <a href="/login" class="login-signup">Login or Signup here to begin buying and selling</a>
-//         {{/if}}
-//       </div>
-
-//       <div class="hamburger-menu">
-//         <span></span>
-//         <span></span>
-//         <span></span>
-//       </div>
-//     </div>
-
-
-//   </header>

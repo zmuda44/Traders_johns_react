@@ -44,12 +44,10 @@ return (
 
 ) : (
   <UserProfile 
-  user={userState}
+  user={userState.userName}
   />
 )  
 }
-
-
 </>
 
 

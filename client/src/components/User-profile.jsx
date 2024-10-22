@@ -5,16 +5,15 @@ import CreateProduct from '../components/Create-product.jsx'
 
 
 
-function UserProfile () {
+function UserProfile ({ user }) {
 
 console.log("hit")
 return (
 <div className="profile-section">
 
-  <h1>Welcome, !</h1>
+  <h1>Welcome, {user}</h1>
 
   <div className="profile-section-block">
-    <h3>Popular Items</h3>
     <PopularItems />
   </div>
 
@@ -24,7 +23,6 @@ return (
   </div>
 
   <div className="profile-section-block">
-    <h3>Current Watched Products:</h3>
     <WatchedItems />
   </div>
 

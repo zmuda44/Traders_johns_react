@@ -151,7 +151,7 @@ router.post('/products/:product_id/watched', async (req, res) => {
 
     // Add the product to the user's watched products
     const data = { user_id: userId, product_id: productId }
-    const purchasedProductData = await WatchedProduct.create(data);
+    const watchedProductData = await WatchedProduct.create(data);
 
     //Why does this not console.log this?
     // console.log(`Product (ID: ${productId}) has been added to User (ID: ${userId})'s purchased products.`);
@@ -163,6 +163,53 @@ router.post('/products/:product_id/watched', async (req, res) => {
 
   }
 })
+
+router.delete('/products/:product_id/watched', async (req, res) => {
+  try {
+    let userId;
+
+    // Use session user_id if available, otherwise default to 1 (for testing purposes)
+    if (!req.session.user_id) {
+      userId = 1;
+    } else {
+      userId = req.session.user_id;
+    }
+
+    const productId = req.params.product_id;
+
+    // Check if the user exists
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the product exists
+    const product = await Product.findByPk(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Delete the product from the user's watched products
+    const deleted = await WatchedProduct.destroy({
+      where: {
+        user_id: userId,
+        product_id: productId
+      }
+    });
+
+    // If no row was deleted, it means the watchlist entry didn't exist
+    if (!deleted) {
+      return res.status(404).json({ message: 'Watched product not found' });
+    }
+
+    // Successfully deleted the product from the watchlist
+    res.json({ message: `Product (ID: ${productId}) has been removed from User (ID: ${userId})'s watchlist.` });
+    
+  } catch (error) {
+    console.error('Error removing product from watched products:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 router.get('/seller/:userId', async (req, res) => {
   try {

@@ -3,14 +3,35 @@
     text-align: center;
 }
 
-.profile-section-block {
-    margin: 20px 0;
+
+/* Create new product form */
+.create-new-product {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     border: solid;
-    box-shadow: 20px black;
+    margin: 50px 0px;
 }
-.create-new-product h3,
-.profile-section-block > h3 {
-    background-color: black;
-    color: white;
+
+#new-product {
+    display: block;
+
+}
+
+.form-section {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    margin: 5px 5px;
+    align-items: stretch;
+}
+
+.product-create-btn {
+    width: 98%;
+}
+
+.categories button img {
+    width: 105px;
+    height: 70px;
 }
 

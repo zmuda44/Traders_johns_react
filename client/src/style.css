@@ -14,15 +14,10 @@ body {
     color: black;
     max-width: 1200px;
     margin: auto;
+    padding: 0 20px;
 }
 
-.container button {
-    background-color: white;
-    color: black;
-    border: 2px solid #555555;
-    width: 110px;
-    margin: 2px;
-}
+
 
 /* Begin header section */
 
@@ -47,9 +42,17 @@ header .container {
     color: red;
 }
 
-header a {
+.header-link-container h4 {
+    margin: 0 5px;
+}
+
+.header-link-container p {
+    display: inline-block;
     text-decoration: none;
-    color: inherit;
+    cursor: pointer;
+    margin: 0 5px;
+
+
 }
 
 header button {
@@ -62,52 +65,56 @@ header button {
 
 /* Begin main section */
 
-main {
-    display: flex;
-    /* flex-wrap: wrap; */
-}
-
-
-
 .container input {
     display: flex;
     justify-content: center;
 }
 
-main .container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.homepage-main {
+.homepage-main .container {
     display: flex;
 }
 
 /* Begin aside */
 
-.homepage-main .categories {
-
+aside {
+    border: solid black;
+    width: 20%;
+    text-align: center;
 }
 
-.homepage-main .categories button {
-    display: block;
-    margin-top: 5px;
+.categories-aside button {
+    background-color: white;
+    color: black;
+    width: 110px;
+    height: 30px;
+    margin: 5px;
 }
-
-
 
 /* Begin homepage main content */
-.main-homepage-content {
-    width: 75%;
+
+.homepage-products {
+    margin-left: 20px;
+}
+.homepage-signout {
+    text-align: center;
 }
 
-.convert {
+.product-section {
+    /* border: solid black; */
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+
+
+/* .convert {
     display: flex;
     justify-content: end;
     gap: 10px;
     margin-right: 5px;
     align-items: center;
-}
+} */
 
 
 /* Card container */
@@ -149,40 +156,11 @@ main .container {
     margin: auto;
 }
 
-#product-elseprice {
+/* #product-elseprice {
     font-style: normal;
-}
+} */
 
-/* Create new product form */
-.create-new-product {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    border: solid;
-    margin: 50px 0px;
-}
 
-#new-product {
-    display: block;
-
-}
-
-.form-section {
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    margin: 5px 5px;
-    align-items: stretch;
-}
-
-.product-create-btn {
-    width: 98%;
-}
-
-.categories button img {
-    width: 105px;
-    height: 70px;
-}
 
 
 /* Mobile menus */
@@ -200,7 +178,7 @@ main .container {
         margin-top: 2px;
     }
 
-    .header-btn-container {
+    /* .header-btn-container {
         display: none;
         position: absolute;
         right: 0;
@@ -209,7 +187,7 @@ main .container {
         border: solid;
         height: 100px;
         padding: 0 10px;
-    }
+    } */
 
     .header-btn-container.active {
         display: flex;
