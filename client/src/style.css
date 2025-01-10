@@ -101,7 +101,6 @@ aside {
 
 .product-section {
     /* border: solid black; */
-    background-color: white;
     margin-bottom: 10px;
     padding: 5px;
 }
@@ -119,9 +118,13 @@ aside {
 
 /* Card container */
 .card-container {
+    width: 30%;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 .card {

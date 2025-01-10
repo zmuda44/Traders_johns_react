@@ -38,6 +38,7 @@ useEffect(() => {
   const handleCategoryClick = (event) => {
     const categoryId = event.target.value;
     setCategoryButtonState({value: categoryId})
+    
   };  
 
 return (
