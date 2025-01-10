@@ -97,6 +97,17 @@ return (
       {UserDisplayState && <WatchedItems />}
       <PopularItems />  
       <CategoryItems categoryId = {categoryButtonState.value} />
+      <CategoryItems categoryId = {1} />
+      <CategoryItems categoryId = {2} />
+      <CategoryItems categoryId = {3} />
+      <CategoryItems categoryId = {4} />
+      <CategoryItems categoryId = {5} />
+      <CategoryItems categoryId = {6} />
+      <CategoryItems categoryId = {7} />
+      <CategoryItems categoryId = {8} />
+      <CategoryItems categoryId = {9} />
+      <CategoryItems categoryId = {10} />
+      <CategoryItems categoryId = {11} />
     </div>
   </div>
 </div>
