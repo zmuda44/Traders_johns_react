@@ -18,7 +18,8 @@ useEffect(() => {
       })
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        // throw new Error('something went wrong!');
+        return
       }     
 
       const userData = await response.json()
@@ -26,7 +27,7 @@ useEffect(() => {
       setUserDisplayState({userData})
 
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   };
 
@@ -78,6 +79,7 @@ return (
         </button>
         <button className="category-names" value="10" onClick={handleCategoryClick}>
           Cereal
+          
         </button>
         <button className="category-names" value="11" onClick={handleCategoryClick}>
           Frozen-Goods
@@ -96,7 +98,9 @@ return (
       )}
       {UserDisplayState && <WatchedItems />}
       <PopularItems />  
-      <CategoryItems categoryId = {categoryButtonState.value} />
+      <CategoryItems 
+        categoryId = {categoryButtonState.value}
+        chosen = {true} />
       <CategoryItems categoryId = {1} />
       <CategoryItems categoryId = {2} />
       <CategoryItems categoryId = {3} />

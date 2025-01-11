@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
 });
 
 //Get route for when button is pressed on hompage, only show that category on this page
+//api/products/category/:category_id
 router.get('/category/:category_id', async (req,res) => {
   try {
     console.log("new route hit")
