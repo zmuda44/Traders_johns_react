@@ -14,7 +14,7 @@ useEffect(() => {
     const cookie = document.cookie;
     if (!cookie.includes("your_session_cookie_name")) {
       console.log("No session cookie found. Skipping fetch.");
-      setUserDisplayState({ userName: "" });
+      // setUserDisplayState({ userName: "" });
       return;
     }
 
@@ -49,7 +49,7 @@ useEffect(() => {
     
   };  
 
-  console.log(!UserDisplayState)
+  console.log(UserDisplayState)
 
 return (
 <div className="homepage-main">

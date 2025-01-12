@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function Navbar() {
-  const [userState, setUserState] = useState({ userName: null });
+  const [userState, setUserState] = useState({userName: ""});
 
   useEffect(() => {
     const getUserData = async () => {
