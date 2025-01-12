@@ -39,6 +39,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       },
+      // {
+      //   path: '/products/:productId',
+      //   element: <ProductDetails />
+      // },
       {
         path: '/user/:userId',
         element: <SellerPage />
@@ -48,7 +52,7 @@ const router = createBrowserRouter([
         element: <SellerDashboard />
       },
       {
-        path: '/users/product/:productId',
+        path: '/user/seller-dasboard/:productId',
         element: <EditProduct />
       },
     ],

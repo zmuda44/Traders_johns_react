@@ -57,9 +57,6 @@ header button {
     height: 40px;
 }
 
-.hamburger-menu {
-    display: none;
-}
 
 /* Begin main section */
 
@@ -75,7 +72,7 @@ header button {
 /* Begin aside */
 
 aside {
-    border: solid black;
+
     width: 20%;
     text-align: center;
 }

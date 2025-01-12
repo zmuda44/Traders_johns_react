@@ -107,7 +107,7 @@ router.post('/logout', (req, res) => {
 router.get('/products/watched', async (req, res) => {
   console.log(req.session.user_id)
 
-  let userId = req.session.user_id || 1;
+  let userId = req.session.user_id 
 
   const user = await User.findByPk(userId, {
     attributes: { exclude: ['password'] },

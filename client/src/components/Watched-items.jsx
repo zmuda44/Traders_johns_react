@@ -33,7 +33,7 @@ useEffect(() => {
       getProductsData();
   }, []);  
 
-
+console.log(productsDisplayState)
 
 return (
 

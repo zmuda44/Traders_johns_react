@@ -42,8 +42,6 @@ useEffect(() => {
     
   };  
 
-  console.log(UserDisplayState)
-
 return (
 <div className="homepage-main">
   <div className="container"> 

@@ -47,8 +47,6 @@ function Navbar() {
     }
   }
 
-  console.log(userState.userName)
-
   return (
     <header>
       <div className="container">

@@ -8,14 +8,6 @@ const [userState, setUserState] = useState({ userName: null })
 
 useEffect(() => {
   const getUserData = async () => {
-    //If user is not logged in, do not try to find a user
-    const cookie = document.cookie;
-    if (!cookie.includes("your_session_cookie_name")) {
-      console.log("No session cookie found. Skipping fetch.");
-      setUserState({ userName: "" });
-      return;
-    }
-
     try {
     const response = await fetch(`/api/users/me`, {
       headers: {

@@ -35,7 +35,7 @@ function ProductCard ({ product }) {
       }
     };
   
-        // getUserData();
+        getUserData();
     }, []);
 
  
