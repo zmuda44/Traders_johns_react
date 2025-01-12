@@ -39,7 +39,8 @@ function CategoryItems (props) {
       <div className="card-container">
         {productsDisplayState.map((product) => (
           <ProductCard 
-            key={product.id}
+            key="TR"
+            // key={product.id}
             product={product}
           />
         ))}
