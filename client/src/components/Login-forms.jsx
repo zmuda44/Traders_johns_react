@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function LoginForms () {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [userSignupFormState, setSignupFormState] = useState({
     username: "",
@@ -48,7 +48,9 @@ function LoginForms () {
 
       if (response.ok) {
         // Redirect to the homepage upon successful login
-        navigate('/');
+        document.location.replace('/profile');
+
+
       } else {
         console.log("Login failed.");
       }  
@@ -73,7 +75,7 @@ function LoginForms () {
 
       if (response.ok) {
         // Redirect to the homepage upon successful login
-        navigate('/profile');
+        document.location.replace('/profile');
       } else {
         console.log("Login failed.");
       }

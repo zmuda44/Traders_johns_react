@@ -35,7 +35,7 @@ function Profile () {
         getUserData();
     }, []);
 
-
+console.log(userState)
 
 return (
 <>

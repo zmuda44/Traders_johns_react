@@ -1,31 +1,17 @@
 import { useState, useEffect } from "react";
 
 function Navbar() {
-  const [userState, setUserState] = useState({userName: ""});
+  const [userState, setUserState] = useState({ userName: "" });
 
   useEffect(() => {
     const getUserData = async () => {
-      //If user is not logged in, do not try to find a user
-      const cookie = document.cookie;
-      if (!cookie.includes("your_session_cookie_name")) {
-        console.log("No session cookie found. Skipping fetch.");
-        setUserState({ userName: "" });
-        return;
-      }
-      
+
       try {
         const response = await fetch(`/api/users/me`, {
           headers: {
             'Content-Type': 'application/json',
           }
         });
-
-        if (response.status === 401) {
-          // Handle 401 status (unauthorized)
-          setUserState({ userName: "" });
-          console.log("User is not authorized"); // Optionally log this to the console
-          return; // Skip the rest of the logic for unauthorized users
-        }
 
         if (!response.ok) {
           throw new Error('Something went wrong!');
@@ -61,7 +47,7 @@ function Navbar() {
     }
   }
 
-  console.log(userState)
+  console.log(userState.userName)
 
   return (
     <header>
@@ -83,12 +69,6 @@ function Navbar() {
               <p>Login or Signup here <br />to begin buying and selling</p>
             </a>
           )}
-        </div>
-
-        <div className="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
         </div>
       </div>
     </header>
