@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 function Navbar() {
-  const [userState, setUserState] = useState({ userName: "" });
+  const [userState, setUserState] = useState({ userName: null });
 
   useEffect(() => {
     const getUserData = async () => {
+      //If user is not logged in, do not try to find a user
       const cookie = document.cookie;
       if (!cookie.includes("your_session_cookie_name")) {
         console.log("No session cookie found. Skipping fetch.");
@@ -59,6 +60,8 @@ function Navbar() {
       alert(response.statusText);
     }
   }
+
+  console.log(userState)
 
   return (
     <header>

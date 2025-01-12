@@ -4,40 +4,42 @@ import { useState, useEffect } from "react";
 
 function Footer () {
 
-const [userState, setUserState] = useState({ userName: "" })
-
-// const [productState, setProductState] = useState(
-
-// )
+const [userState, setUserState] = useState({ userName: null })
 
 useEffect(() => {
   const getUserData = async () => {
-      try {
-      const response = await fetch(`/api/users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-        }          
-      })
+    //If user is not logged in, do not try to find a user
+    const cookie = document.cookie;
+    if (!cookie.includes("your_session_cookie_name")) {
+      console.log("No session cookie found. Skipping fetch.");
+      setUserState({ userName: "" });
+      return;
+    }
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }     
+    try {
+    const response = await fetch(`/api/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }          
+    })
 
-      const user = await response.json()
-     
-      setUserState({
-        userName: user.username || ""
-      });
+    if (!response.ok) {
+      throw new Error('something went wrong!');
+    }    
 
-      
+    const user = await response.json()
+    
+    setUserState({
+      userName: user.username || ""
+    });    
 
     } catch (err) {
       console.error(err);
     }
-  };
+};
 
-      getUserData();
-  }, []);
+    getUserData();
+}, []);
 
  async function handleLogout () {
     const response = await fetch('/api/users/logout', {
@@ -50,8 +52,6 @@ useEffect(() => {
     } else {
       alert(response.statusText);
     }
-
-
   }
 
 return (

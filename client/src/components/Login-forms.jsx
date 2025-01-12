@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginForms () {
   const navigate = useNavigate()
-  console.log("hit")
 
   const [userSignupFormState, setSignupFormState] = useState({
     username: "",

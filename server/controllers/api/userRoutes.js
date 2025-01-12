@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Product, WatchedProduct, Category } = require('../../models');
 
+//Get User
+//api/users/me
 router.get('/me', async (req, res) => {
 
     try {
@@ -34,6 +36,9 @@ router.get('/me', async (req, res) => {
     }
 })
 
+
+//Create new user
+//api/users
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -50,6 +55,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Login 
+//api/users/login
 router.post('/login', async (req, res) => {
 
   try {
@@ -83,6 +90,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//Logout user
+//api/users/logout 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -93,6 +102,8 @@ router.post('/logout', (req, res) => {
   }
 });
 
+//User's watched products
+//api/users/products/watched
 router.get('/products/watched', async (req, res) => {
   console.log(req.session.user_id)
 
@@ -116,11 +127,11 @@ router.get('/products/watched', async (req, res) => {
       ]
     }]
   });
-
 res.json(user)
-
 })
 
+//Route to add watched product
+//api/users/products/:product_id/watched
 router.post('/products/:product_id/watched', async (req, res) => {
   try {
     let userId;
@@ -164,6 +175,8 @@ router.post('/products/:product_id/watched', async (req, res) => {
   }
 })
 
+//Remove from user's watched products
+//api/users/products/:product_id/watched
 router.delete('/products/:product_id/watched', async (req, res) => {
   try {
     let userId;
@@ -210,6 +223,8 @@ router.delete('/products/:product_id/watched', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
 
 router.get('/seller/:userId', async (req, res) => {
   try {

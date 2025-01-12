@@ -104,7 +104,7 @@ function CreateProduct () {
 
       <div className="form-section">
         <label htmlFor="product-category">Category</label>
-        <select id="product-category" name="category_id" onChange={handleProductChange} name="product-category">
+        <select id="product-category" name="category_id" onChange={handleProductChange} rname="product-category">
           <option
            value="1" >Produce</option>
           <option

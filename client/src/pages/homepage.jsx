@@ -10,29 +10,36 @@ const [UserDisplayState, setUserDisplayState] = useState(null)
 
 useEffect(() => {
   const getUserData = async () => {
-      try {
-      const response = await fetch(`/api/users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-        }          
-      })
-
-      if (!response.ok) {
-        // throw new Error('something went wrong!');
-        return
-      }     
-
-      const userData = await response.json()
-     
-      setUserDisplayState({userData})
-
-    } catch (err) {
-      // console.error(err);
+    //If user is not logged in, do not try to find a user
+    const cookie = document.cookie;
+    if (!cookie.includes("your_session_cookie_name")) {
+      console.log("No session cookie found. Skipping fetch.");
+      setUserDisplayState({ userName: "" });
+      return;
     }
-  };
 
-      getUserData();
-  }, []);
+    try {
+    const response = await fetch(`/api/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }          
+    })
+
+    if (!response.ok) {
+      throw new Error('something went wrong!');
+      return
+    }     
+
+    const userData = await response.json()
+    
+    setUserDisplayState({userData})
+
+  } catch (err) {
+    // console.error(err);
+  }
+  };
+  getUserData();
+}, []);
 
   const [categoryButtonState, setCategoryButtonState] = useState({value: 1})
 
@@ -42,6 +49,8 @@ useEffect(() => {
     
   };  
 
+  console.log(!UserDisplayState)
+
 return (
 <div className="homepage-main">
   <div className="container"> 
@@ -49,7 +58,7 @@ return (
       <div className="popular-aside">   
       </div>
       <div className="categories-aside">
-      <h2>Categories</h2>
+        <h2>Categories</h2>
         <button className="category-names" value="1" onClick={handleCategoryClick}>
         Produce
         </button>
@@ -78,15 +87,12 @@ return (
           Bakery
         </button>
         <button className="category-names" value="10" onClick={handleCategoryClick}>
-          Cereal
-          
+          Cereal          
         </button>
         <button className="category-names" value="11" onClick={handleCategoryClick}>
           Frozen-Goods
         </button>
-      </div>
-    
-        
+      </div>        
     </aside> 
 
     <div className="homepage-products">

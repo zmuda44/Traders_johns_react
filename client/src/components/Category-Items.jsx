@@ -18,7 +18,7 @@ function CategoryItems (props) {
           throw new Error('Something went wrong while fetching products!');
         }
         const productsData = await productsResponse.json();
-        console.log(productsData[0].category.category_name)
+
         setProductsDisplayState(productsData);  
 
         setCategoryDisplayState({ categoryName: productsData[0].category.category_name });
