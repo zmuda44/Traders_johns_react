@@ -105,7 +105,7 @@ router.post('/logout', (req, res) => {
 //User's watched products
 //api/users/products/watched
 router.get('/products/watched', async (req, res) => {
-  console.log(req.session.user_id)
+  // console.log(req.session.user_id) 44444
 
   let userId = req.session.user_id 
 
@@ -153,7 +153,7 @@ router.post('/products/:product_id/watched', async (req, res) => {
     // Find the product by ID
     const product = await Product.findByPk(productId);
 
-    console.log(product)
+    // console.log(product) 1111
 
     if (product == undefined) {
       console.log("no product")
@@ -170,7 +170,7 @@ router.post('/products/:product_id/watched', async (req, res) => {
     res.send(product)
 
   } catch (error) {
-    console.error('Error adding product to watched products:', error);
+    // console.error('Error adding product to watched products:', error); 22222
 
   }
 })
@@ -248,7 +248,7 @@ router.get('/seller/:userId', async (req, res) => {
 
     res.json(user); // Send the user data in the response
   } catch (err) {
-    console.log(err);
+    // console.log(err); 333333
     res.status(500).json({ message: 'Server error', error: err });
   }
 });

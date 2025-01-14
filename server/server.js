@@ -17,12 +17,11 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 require('dotenv').config()
-// Added secret variable for sess object
+
 const sess = {
-  // secret: process.env.SESS_SECRET,
-  secret: 'fad@#DF332g32erwer',
+  secret: process.env.SESS_SECRET,
   cookie: {
-    maxAge: 60 * 60 * 1_000,
+    maxAge: 60 * 100,
     httpOnly: true,
     secure: false,
     sameSite: false,

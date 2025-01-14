@@ -38,16 +38,17 @@ console.log(productsDisplayState)
 return (
 
 <div id="watched-items" className="product-section">
-<h3>Watched Items</h3>
-  <div className="card-container">
+  <h3>Watched Items</h3>
+  {productsDisplayState.length == 0 && <p>You current have no watched items</p>}
+  {productsDisplayState.length != 0 && <div className="card-container">
     {productsDisplayState.map((product) => (
       <ProductCard
-        key={product.id} 
+        key={`w${product.id}`} 
         product={product}
             
     />
     ))}
-  </div>
+  </div>}
 </div>
   
 )
