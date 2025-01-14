@@ -72,7 +72,6 @@ header button {
 /* Begin aside */
 
 aside {
-
     width: 20%;
     text-align: center;
 }
@@ -89,9 +88,8 @@ aside {
 
 .homepage-products {
     margin-left: 20px;
-}
-.homepage-signout {
-    text-align: center;
+    border: solid black;
+    width: 80%;
 }
 
 .product-section {
@@ -102,7 +100,7 @@ aside {
 
 /* Card container */
 .card-container {
-    width: 30%;
+    width: 100%;
     padding: 20px;
     display: flex;
     /* flex-wrap: wrap; */
@@ -115,25 +113,25 @@ aside {
 .card {
     color: black;
     background-color: rgb(231, 255, 255);
-    width: 200px;
+    min-width: 200px;
     padding: 5px;
     margin: 5px;
     border: solid;
     text-align: center;
 }
 
-.card h3 {
-    margin: 2px 0;
-}
-
-.card p {
+.card h3, .card p {
     margin: 5px 0;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
 }
 
 /* Set max size for images */
 .card img {
     width: 100px;
     height: 80px;
+    object-fit: cover;
 }
 
 /* Login and Sign up forms */

@@ -26,7 +26,6 @@ router.post('/', async (req, res) => {
 //api/products/category/:category_id
 router.get('/category/:category_id', async (req,res) => {
   try {
-    console.log("new route hit")
     let products = await Product.findAll({ 
       where: { category_id: req.params.category_id }, 
       include: [
