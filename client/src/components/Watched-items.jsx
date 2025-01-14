@@ -43,7 +43,7 @@ return (
   {productsDisplayState.length != 0 && <div className="card-container">
     {productsDisplayState.map((product) => (
       <ProductCard
-        key={product.id} 
+        key={`w${product.id}`} 
         product={product}
             
     />

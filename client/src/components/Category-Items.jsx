@@ -28,7 +28,7 @@ function CategoryItems (props) {
       }
     };
 
-    getCategoryData();
+    // getCategoryData();
   }, [props.categoryId]);
 
   return (
@@ -39,7 +39,7 @@ function CategoryItems (props) {
       <div className="card-container">
         {productsDisplayState.map((product) => (
           <ProductCard 
-            key="TR"
+            key={`c${product.id}`}
             // key={product.id}
             product={product}
           />
