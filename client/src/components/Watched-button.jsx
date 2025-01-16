@@ -28,11 +28,12 @@ function WatchedButton({ id }) {
       }
     };
 
-    getProductsData();
+    // getProductsData();
   }, [id]); // Run the effect when the component mounts or when `id` changes
 
   const handleWatchedSubmit = async () => {
-    try {
+
+    try {    
       const method = watchedState ? "DELETE" : "POST"; // Use DELETE if removing, POST if adding
       const response = await fetch(`/api/users/products/${id}/watched`, {
         method: method,

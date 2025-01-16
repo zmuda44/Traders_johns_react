@@ -37,7 +37,8 @@ router.get('/me', async (req, res) => {
 })
 
 
-//Create new user
+//Create 
+// user
 //api/users
 router.post('/', async (req, res) => {
   try {
@@ -105,7 +106,6 @@ router.post('/logout', (req, res) => {
 //User's watched products
 //api/users/products/watched
 router.get('/products/watched', async (req, res) => {
-  // console.log(req.session.user_id) 44444
 
   let userId = req.session.user_id 
 
@@ -127,22 +127,16 @@ router.get('/products/watched', async (req, res) => {
       ]
     }]
   });
-res.json(user)
+  res.json(user)
 })
 
 //Route to add watched product
 //api/users/products/:product_id/watched
 router.post('/products/:product_id/watched', async (req, res) => {
+console.log("hd")
   try {
-    let userId;
+    const userId = req.session.user_id;
 
-    if(!req.session.user_id) {
-      userId = 1
-    }
-    else {
-      userId = req.session.user_id
-    }
-   
     const productId = req.params.product_id
 
     const user = await User.findByPk(userId);
