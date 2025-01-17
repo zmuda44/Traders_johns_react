@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function WatchedButton({ id }) {
   const [watchedState, setWatchedState] = useState(false); // Initially assume it's not watched
-
+console.log(id)
   useEffect(() => {
     const getProductsData = async () => {
       try {

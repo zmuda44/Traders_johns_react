@@ -23,7 +23,8 @@ function ProductCard ({ product, username }) {
       </p>
 
       {username && <WatchedButton
-        id={product?.id} />} 
+        id={product?.id} />}
+         
 
     </div>
   );
