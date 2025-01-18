@@ -35,8 +35,6 @@ const sess = {
   })
 };
 
-console.log(sess)
-
 app.use(session(sess));
 
 
