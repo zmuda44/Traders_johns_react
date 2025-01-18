@@ -12,7 +12,7 @@ function ProductCard ({ product, username }) {
       <h3 className="product-name">{product.product_name}</h3>
       <p className="product-description">{product.description}</p>
       <p className="product-price">$ {product.price} </p>
-      <img src={`./public/images/${product.category.category_name}.jpg`} alt={product.product_name} />
+      <img src={`./images/${product.category.category_name}.jpg`} alt={product.product_name} />
       <p className="product-creator">
         Sold by: 
         {product.user?.username ? (
