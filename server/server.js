@@ -18,9 +18,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // require('dotenv').config(server/env)
 var dotenv = require('dotenv');
-let dotenvConfig = dotenv.config()
-
-console.log(dotenvConfig)
+// let dotenvConfig = dotenv.config()
 
 const sess = {
   secret: process.env.SESS_SECRET,
