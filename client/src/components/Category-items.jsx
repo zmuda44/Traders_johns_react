@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import ProductCard from './Product-Card';
 
-//changed name
-
 function CategoryItems (props) {
 
   const [productsDisplayState, setProductsDisplayState] = useState([]);
