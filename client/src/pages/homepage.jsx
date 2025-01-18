@@ -6,7 +6,7 @@ import PopularItems from '../components/Popular-items'
 
 function Homepage () {
 
-const [UserDisplayState, setUserDisplayState] = useState(null)
+const [userDisplayState, setUserDisplayState] = useState("")
 
 useEffect(() => {
   const getUserData = async () => {
@@ -25,22 +25,22 @@ useEffect(() => {
 
     const userData = await response.json()
     
-    setUserDisplayState({userData})
+    setUserDisplayState({ ...userData })
+  
 
   } catch (err) {
-    // console.error(err);
+    console.error(err);
   }
   };
-  getUserData();
+    getUserData();
 }, []);
 
-  const [categoryButtonState, setCategoryButtonState] = useState({value: 1})
+const [categoryButtonState, setCategoryButtonState] = useState({value: 1})
 
-  const handleCategoryClick = (event) => {
-    const categoryId = event.target.value;
-    setCategoryButtonState({value: categoryId})
-    
-  };  
+const handleCategoryClick = (event) => {
+  const categoryId = event.target.value;
+  setCategoryButtonState({value: categoryId})  
+};  
 
 return (
 <div className="homepage-main">
@@ -87,28 +87,32 @@ return (
     </aside> 
 
     <div className="homepage-products">
-      {!UserDisplayState &&  (
+      {!userDisplayState &&  (
       <div className="homepage-signout">
         <h3>You are signed out</h3>
         <h3>Signup or Login to begin buying and selling</h3>
       </div>
       )}
-      {UserDisplayState && <WatchedItems />}
-      <PopularItems />  
+      {userDisplayState && 
+        <WatchedItems 
+          loggedIn = {true}
+          username={userDisplayState ? userDisplayState.username : ""}
+        />
+      }      
+      <PopularItems 
+        username={userDisplayState ? userDisplayState.username : ""}
+      />
       <CategoryItems 
-        categoryId = {categoryButtonState.value}
-        chosen = {true} />
+        categoryId={categoryButtonState.value}
+        chosen={true}
+        username={userDisplayState ? userDisplayState.username : ""}
+      />
       <CategoryItems categoryId = {1} />
       <CategoryItems categoryId = {2} />
       <CategoryItems categoryId = {3} />
       <CategoryItems categoryId = {4} />
       <CategoryItems categoryId = {5} />
       <CategoryItems categoryId = {6} />
-      <CategoryItems categoryId = {7} />
-      <CategoryItems categoryId = {8} />
-      <CategoryItems categoryId = {9} />
-      <CategoryItems categoryId = {10} />
-      <CategoryItems categoryId = {11} />
     </div>
   </div>
 </div>

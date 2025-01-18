@@ -16,12 +16,16 @@ app.use(express.json());
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-require('dotenv').config()
+// require('dotenv').config(server/env)
+var dotenv = require('dotenv');
+let dotenvConfig = dotenv.config()
+
+console.log(dotenvConfig)
 
 const sess = {
   secret: process.env.SESS_SECRET,
   cookie: {
-    maxAge: 60 * 100,
+    maxAge: 60 * 10000,
     httpOnly: true,
     secure: false,
     sameSite: false,
@@ -32,6 +36,8 @@ const sess = {
     db: sequelize
   })
 };
+
+console.log(sess)
 
 app.use(session(sess));
 

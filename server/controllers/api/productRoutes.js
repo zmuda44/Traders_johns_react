@@ -3,8 +3,7 @@ const { Product, User, Category, WatchedProduct, PurchasedProduct } = require('.
 
 // router.post('/', withAuth, async (req, res) => {
 
-router.post('/', async (req, res) => {
-  
+router.post('/', async (req, res) => {  
 
   const newProductData = { ...req.body, user_id: req.session.user_id }
   console.log(newProductData)
@@ -26,7 +25,6 @@ router.post('/', async (req, res) => {
 //api/products/category/:category_id
 router.get('/category/:category_id', async (req,res) => {
   try {
-    console.log("new route hit")
     let products = await Product.findAll({ 
       where: { category_id: req.params.category_id }, 
       include: [
@@ -47,8 +45,6 @@ router.get('/category/:category_id', async (req,res) => {
       res.status(500).json(error);
   }
 })
-
-
 
 
 router.post('/:product_id/purchased', async (req, res) => {
@@ -83,7 +79,6 @@ router.post('/:product_id/purchased', async (req, res) => {
 })
 
 router.get('/popular', async (req, res) => {
-
   try {
     const popularProductsData = await WatchedProduct.findAll({
       include: [{ 
@@ -98,26 +93,11 @@ router.get('/popular', async (req, res) => {
 
     res.json(popularProductsData)
   }
-
   catch(err) {
     console.log(err)
   }
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //originally from home route
 router.get('/', async (req, res) => {
@@ -157,27 +137,6 @@ router.get('/', async (req, res) => {
 module.exports = router;
 
 
-
-
-// router.get('/', async (req, res) => {
-
-//   try {
-//     const productData = await Product.findAll()
-
-//     res.json(productData);
-//   } catch (err) {
-//     console.log(err)
-//   }
-// })
-
-
-
-
-
-
-
-
-// }
   
 // async function addProductToWatched(userId, productId) {
 // try {

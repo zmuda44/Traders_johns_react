@@ -28,7 +28,7 @@ function CategoryItems (props) {
       }
     };
 
-    // getCategoryData();
+    getCategoryData();
   }, [props.categoryId]);
 
   return (

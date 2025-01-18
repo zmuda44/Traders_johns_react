@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductCard from './Product-Card';
 
-function PopularItems() {
+function PopularItems({ username }) {
   const [productsDisplayState, setProductsDisplayState] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,8 @@ function PopularItems() {
         {productsDisplayState.map((product) => (
           <ProductCard 
             key={`p${product.id}`}    
-            product={product.product}    
+            product={product.product}
+            username={username ? username : ""}    
           />
         ))}
       </div>
