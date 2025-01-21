@@ -63,9 +63,9 @@ function Navbar() {
               <p id="logout-btn" onClick={handleLogout}>Logout</p>
             </>
           ) : (
-            <a href="/login" className="login-signup">
+            <Link to="/login" className="login-signup">
               <p>Login or Signup here <br />to begin buying and selling</p>
-            </a>
+            </Link>
           )}
         </div>
       </div>
