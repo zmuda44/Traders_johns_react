@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [userState, setUserState] = useState({ userName: "" });
@@ -65,7 +65,7 @@ function Navbar() {
             </>
           ) : (
             <Link to="/login" className="login-signup">
-              <p>Login or Signup here <br />to begin buying and selling</p>
+              Login or Signup here <br></br> to begin buying and selling
             </Link>
           )}
         </div>
