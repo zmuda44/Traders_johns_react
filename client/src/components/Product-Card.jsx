@@ -5,7 +5,7 @@ import WatchedButton from './Watched-button'
 
 function ProductCard ({ product, username }) {
   // const [watchedState, setWatchedState] = useState({}); 
-  console.log(product.id)
+  console.log(product)
 
   return (
     <div key={product.id} className="card">
@@ -23,7 +23,7 @@ function ProductCard ({ product, username }) {
       </p>
 
       {username && <WatchedButton
-        id={product?.id} />}
+        productId={product.id} />}
          
 
     </div>

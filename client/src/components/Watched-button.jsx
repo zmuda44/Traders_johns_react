@@ -1,41 +1,43 @@
 import { useState, useEffect } from "react";
 
-function WatchedButton({ id }) {
+function WatchedButton(props) {
   const [watchedState, setWatchedState] = useState(false); // Initially assume it's not watched
-console.log(id)
-  useEffect(() => {
-    const getProductsData = async () => {
-      try {
-        const response = await fetch(`/api/users/products/watched`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+console.log(props)
 
-        if (!response.ok) {
-          throw new Error("something went wrong!");
-        }
+  // useEffect(() => {
+  //   const getProductsData = async () => {
+  //     try {
+  //       const response = await fetch(`/api/users/products/watched`, {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
 
-        const productsData = await response.json();
+  //       if (!response.ok) {
+  //         throw new Error("something went wrong!");
+  //       }
 
-        // Check if the current product (with `id`) is in the user's watched products
-        const isWatched = productsData.user_watched_products.some(
-          (product) => product.id === id
-        );
-        setWatchedState(isWatched); // Set the initial watched state
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  //       const productsData = await response.json();
 
-    // getProductsData();
-  }, [id]); // Run the effect when the component mounts or when `id` changes
+  //       // Check if the current product (with `id`) is in the user's watched products
+  //       const isWatched = productsData.user_watched_products.some(
+  //         (product) => product.id === id
+  //       );
+  //       setWatchedState(isWatched); // Set the initial watched state
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   // getProductsData();
+  // }, [id]); 
+  // Run the effect when the component mounts or when `id` changes
 
   const handleWatchedSubmit = async () => {
 
     try {    
       const method = watchedState ? "DELETE" : "POST"; // Use DELETE if removing, POST if adding
-      const response = await fetch(`/api/users/products/${id}/watched`, {
+      const response = await fetch(`/api/users/products/${productId}/watched`, {
         method: method,
         headers: {
           "Content-Type": "application/json",

@@ -77,7 +77,8 @@ function LoginForms () {
 
       if (response.ok) {
         // Redirect to the homepage upon successful login
-        document.location.replace('/profile');
+        // document.location.replace('/profile');
+        navigate('/profile')
       } else {
         console.log("Login failed.");
       }
