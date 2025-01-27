@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import WatchedItems from '../components/Watched-items'
 import CategoryItems from '../components/Category-items'
-import AllItems from '../components/All-items'
 import PopularItems from '../components/Popular-items'
 
 function Homepage () {

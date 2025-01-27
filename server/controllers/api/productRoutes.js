@@ -83,7 +83,7 @@ router.get('/popular', async (req, res) => {
     const popularProductsData = await WatchedProduct.findAll({
       include: [{ 
         model: Product,
-        attributes: ['product_name', 'description', 'price', 'category_id'],
+        attributes: ['id', 'product_name', 'description', 'price', 'category_id'],
         include: [{
           model: Category,
           attributes: ['category_name'],

@@ -28,7 +28,6 @@ function PopularItems({ username }) {
     getProductsData();
   }, []);
 
-
   return (
     <div id="popular-items" className="product-section">
       <h3>Popular Items</h3>

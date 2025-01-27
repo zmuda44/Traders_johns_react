@@ -5,7 +5,6 @@ import WatchedButton from './Watched-button'
 
 function ProductCard ({ product, username }) {
   // const [watchedState, setWatchedState] = useState({}); 
-  console.log(product)
 
   return (
     <div key={product.id} className="card">

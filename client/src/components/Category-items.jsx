@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import ProductCard from './Product-Card';
 
+function ProductCardx () {
+  return
+}
+
 function CategoryItems (props) {
 
   const [productsDisplayState, setProductsDisplayState] = useState([]);
@@ -38,7 +42,7 @@ function CategoryItems (props) {
 
       <div className="card-container">
         {productsDisplayState.map((product) => (
-          <ProductCard 
+          <ProductCardx
             key={`c${product.id}`}
             // key={product.id}
             product={product}
