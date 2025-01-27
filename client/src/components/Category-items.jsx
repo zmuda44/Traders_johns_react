@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductCard from './Product-Card';
 
-function ProductCardx () {
-  return
-}
-
-function CategoryItems (props) {
+function CategoryItems ( {categoryId, username, chosen} ) {
 
   const [productsDisplayState, setProductsDisplayState] = useState([]);
   const [categoryDisplayState, setCategoryDisplayState] = useState({ categoryName: "" });
@@ -15,7 +11,7 @@ function CategoryItems (props) {
     const getCategoryData = async () => {
       try {
         // Fetch products for the selected category
-        const productsResponse = await fetch(`/api/products/category/${props.categoryId}`, {
+        const productsResponse = await fetch(`/api/products/category/${categoryId}`, {
           headers: { 'Content-Type': 'application/json' }
         });
         if (!productsResponse.ok) {
@@ -33,19 +29,20 @@ function CategoryItems (props) {
     };
 
     getCategoryData();
-  }, [props.categoryId]);
+  }, [categoryId]);
 
   return (
     <div id="category-items" className="product-section">
       {/* Dynamically update the heading based on the selected category */}
-      <h3>{props.chosen ? `Chosen Category is ${categoryDisplayState.categoryName}` : categoryDisplayState.categoryName || 'Category Items'}</h3>
+      <h3>{chosen ? `Chosen Category is ${categoryDisplayState.categoryName}` : categoryDisplayState.categoryName || 'Category Items'}</h3>
 
       <div className="card-container">
         {productsDisplayState.map((product) => (
-          <ProductCardx
+          <ProductCard
             key={`c${product.id}`}
             // key={product.id}
             product={product}
+            username={username ? username : ""}  
           />
         ))}
       </div>
