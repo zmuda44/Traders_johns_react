@@ -9,6 +9,7 @@ router.get('/me', async (req, res) => {
         if (!req.session.user_id) {
         return res.status(401).json({ message: 'Not logged in' });
         }  
+
       const userData = await User.findByPk(req.session.user_id, {
           attributes: { exclude: ['password'] },
           include: [{ 
@@ -28,6 +29,8 @@ router.get('/me', async (req, res) => {
       if (!userData) {
         return res.status(404).json({ message: 'User not found' });
       }
+
+      console.log(userData)
 
       res.json(userData)
 

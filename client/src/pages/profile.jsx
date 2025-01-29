@@ -20,6 +20,8 @@ function Profile () {
         }     
   
         const user = await response.json()
+
+        console.log(user)
        
         setUserState({
           userName: user.username || ""
