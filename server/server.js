@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-const routes = require('./controllers');
+const routes = require('./routes');
 // const cors = require('cors');
 const session = require('express-session');
 
@@ -23,7 +23,7 @@ var dotenv = require('dotenv');
 const sess = {
   secret: process.env.SESS_SECRET,
   cookie: {
-    maxAge: 60 * 10000,
+    maxAge: 60 * 10_000,
     httpOnly: true,
     secure: false,
     sameSite: false,
