@@ -3,7 +3,7 @@
   ## Table of Contents
   * [Description](#description)
   * [Production Notes](#notes)
-  * [Link to website](#link)
+  * [Link to website](#website)
   * [Questions](#questions)
   
   ## Description: 
@@ -12,14 +12,10 @@
   ## Notes:
   This project was originally a collaborative project. Please see link for original project repo. https://github.com/zmuda44/Traders-Johns-E-commerce-site-group-project
 
-  Please note my contributions to the original project in both front-end and back-end. I have taken the original collaborative project and greatly improved functionality, added new features and restyled the website. 
+  Please note my contributions to the original project in both front-end and back-end. I have taken the original collaborative project and greatly improved functionality, added new features and restyled the website.  
 
-  
-
-  ## Link:
-
-
-
+  ## Website:
+  https://traders-johns.onrender.com/
 
 
   ## Questions: 
