@@ -1,49 +1,46 @@
 import { useState, useEffect } from "react";
 
-
-
 function Footer () {
 
-const [userState, setUserState] = useState({ userName: null })
+  const [userState, setUserState] = useState({ userName: null })
 
-useEffect(() => {
-  const getUserData = async () => {
-    try {
-    const response = await fetch(`/api/users/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-      }          
-    })
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+      const response = await fetch(`/api/users/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }          
+      })
 
-    if (!response.ok) {
-      throw new Error('something went wrong!');
-    }    
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }    
 
-    const user = await response.json()
-    
-    setUserState({
-      userName: user.username || ""
-    });    
+      const user = await response.json()
+      
+      setUserState({
+        userName: user.username || ""
+      });    
 
-    } catch (err) {
-      console.error(err);
-    }
-};
+      } catch (err) {
+        console.error(err);
+      }
+    };
+      getUserData();
+  }, []);
 
-    getUserData();
-}, []);
+  async function handleLogout () {
+      const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
- async function handleLogout () {
-    const response = await fetch('/api/users/logout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
-    }
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        alert(response.statusText);
+      }
   }
 
 return (
@@ -55,7 +52,6 @@ return (
       </div>
 
       <div className="header-link-container">
-
         {userState.userName ? (
         <>            
         <h4>Welcome, {userState.userName}</h4> 
@@ -65,7 +61,6 @@ return (
         ) : (
         <a href="/login" className="login-signup"><p>Login or Signup here <br />to begin buying and selling</p></a>
         )}
-
       </div>
 
       <div className="hamburger-menu">
@@ -74,11 +69,7 @@ return (
         <span></span>
       </div>
     </div>
-
-
   </header>
-
-
 
 )}
 
