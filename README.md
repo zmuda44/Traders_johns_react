@@ -3,6 +3,7 @@
   ## Table of Contents
   * [Description](#description)
   * [Production Notes](#notes)
+  * [Improved functionality](#improvements)
   * [Link to website](#website)
   * [Questions](#questions)
   
@@ -12,7 +13,16 @@
   ## Notes:
   This project was originally a collaborative project. Please see link for original project repo. https://github.com/zmuda44/Traders-Johns-E-commerce-site-group-project
 
-  Please note my contributions to the original project in both front-end and back-end. I have taken the original collaborative project and greatly improved functionality, added new features and restyled the website.  
+  Please note my contributions to the original project in both front-end and back-end. I have taken the original collaborative project and greatly improved functionality, added new features and restyled the website.
+
+  ## Improvements:
+  The list below are improvements done by me from the original collaborative project
+  - Restyled homepage to list all items by category in sections. When a category is chosen, the chosen category row updates accordingly.
+  - Added watched items functionality and ability to watch and unwatch products. This involved more complicated queries with include models through other models.
+  - Added functionality to query popular items based on number of watches and display on homepage and profile page.
+  - Added functionailty so that a user creating a product can upload an image.
+
+
 
   ## Website:
   https://traders-johns.onrender.com/
