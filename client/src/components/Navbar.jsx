@@ -60,7 +60,7 @@ function Navbar() {
           {userState.userName ? (
             <>
               <h4>Welcome, {userState.userName}</h4>
-              <a href="/profile"><p id="profile-link">Profile</p></a>
+              <Link to="/profile" className="profile-link">Profile</Link>
               <p id="logout-btn" onClick={handleLogout}>Logout</p>
             </>
           ) : (
