@@ -86,18 +86,7 @@ return (
       </div>        
     </aside> 
 
-
-</div></div>
-
-
-
-
-  );
-}
-
-export default Homepage
-
-{/* <div className="homepage-products">
+    <div className="homepage-products">
       {!userDisplayState &&  (
       <div className="homepage-signout">
         <h3>You are signed out</h3>
@@ -126,4 +115,10 @@ export default Homepage
       <CategoryItems categoryId = {6} />
     </div>
   </div>
-</div> */}
+</div>
+  );
+}
+
+export default Homepage
+
+
