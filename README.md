@@ -4,6 +4,7 @@
   * [Description](#description)
   * [Production Notes](#notes)
   * [Improved functionality](#improvements)
+  * [Upcoming features](#upcoming)
   * [Link to website](#website)
   * [Questions](#questions)
   
@@ -17,12 +18,15 @@
 
   ## Improvements:
   The list below are improvements done by me from the original collaborative project
+  - Original project was done using Handlebars. I switched over to a React frontend.
   - Restyled homepage to list all items by category in sections. When a category is chosen, the chosen category row updates accordingly.
   - Added watched items functionality and ability to watch and unwatch products. This involved more complicated queries with include models through other models.
   - Added functionality to query popular items based on number of watches and display on homepage and profile page.
-  - Added functionailty so that a user creating a product can upload an image.
+  - Added User sold items to profile page and a seller dashboard which will allow the User to edit and delete their items listed for sale.
 
-
+  ## Upcoming:
+  The seller dashboard will allow a User to edit and delete their sold products
+  A User can click on any individual product and be taken to that individual product page with checkout options
 
   ## Website:
   https://traders-johns.onrender.com/
