@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { Product, User, Category, WatchedProduct, PurchasedProduct } = require('../../models');
 
-// router.post('/', withAuth, async (req, res) => {
 
+// Seller create new product
 router.post('/', async (req, res) => {  
 
   const newProductData = { ...req.body, user_id: req.session.user_id }
@@ -45,6 +45,33 @@ router.get('/category/:category_id', async (req,res) => {
       res.status(500).json(error);
   }
 })
+
+//Get individual product
+router.get('/id/:productId', async (req, res) => {
+  console.log("single product hit");
+  const productId = req.params.productId;
+
+  try {
+    const product = await Product.findByPk(productId, {
+      include: [
+        {
+          model: Category,
+          attributes: ['category_name'], // Make sure the category is included
+        }
+      ]
+    });
+
+    if (!product) {
+      return res.status(404).json("Product not found"); // Return a 404 error if product is not found
+    }
+
+    console.log(product);
+    res.json(product); // Return the product data to the front-end
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Something went wrong" }); // Handle error gracefully
+  }
+});
 
 
 router.post('/:product_id/purchased', async (req, res) => {
@@ -101,31 +128,15 @@ router.get('/popular', async (req, res) => {
 
 //originally from home route
 router.get('/', async (req, res) => {
-  console.log("path hit")
+
   try {
       const productData = await Product.findAll({
           include: [{
               model: Category,
               attributes: ['category_name'],
           }] // Include the Category model to fetch associated categories
-      });
+      });        
 
-      // const products = productData.map((product) => product.get({ plain: true }));
-     
-      // const userData = await User.findByPk(req.session.user_id, {
-      //     attributes: { exclude: ['password'] },
-      //     // include: [{ model: Product }],
-      //   });
-
-        
-
-      // const user = userData.get({ plain: true });
-
-    //  console.log(user)
-    
-
-
-      // res.render('homepage', { user, products, logged_in: req.session.logged_in });
       res.json(productData);
 
   } catch (err) {
@@ -138,25 +149,3 @@ module.exports = router;
 
 
   
-// async function addProductToWatched(userId, productId) {
-// try {
-//   // Find the user by ID
-//   const user = await User.findByPk(userId);
-//   if (!user) {
-//     throw new Error('User not found');
-//   }
-
-//   // Find the product by ID
-//   const product = await Product.findByPk(productId);
-//   if (!product) {
-//     throw new Error('Product not found');
-//   }
-
-//   // Add the product to the user's watched products
-//   await user.addWatched_product(product);
-
-//   console.log(`Product (ID: ${productId}) has been added to User (ID: ${userId})'s watched products.`);
-// } catch (error) {
-//   console.error('Error adding product to watched products:', error);
-// }
-// )

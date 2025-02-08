@@ -150,8 +150,6 @@ console.log("hd")
     // Find the product by ID
     const product = await Product.findByPk(productId);
 
-    // console.log(product) 1111
-
     if (product == undefined) {
       console.log("no product")
       return res.json('Product not found');
@@ -160,14 +158,10 @@ console.log("hd")
     // Add the product to the user's watched products
     const data = { user_id: userId, product_id: productId }
     const watchedProductData = await WatchedProduct.create(data);
-
-    //Why does this not console.log this?
-    // console.log(`Product (ID: ${productId}) has been added to User (ID: ${userId})'s purchased products.`);
-
+    
     res.send(product)
 
-  } catch (error) {
-    // console.error('Error adding product to watched products:', error); 22222
+  } catch (error) {  
 
   }
 })

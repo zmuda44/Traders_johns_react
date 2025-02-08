@@ -94,10 +94,10 @@ return (
       </div>
       )}
       {userDisplayState && 
-        <WatchedItems 
-          loggedIn = {true}
-          username={userDisplayState ? userDisplayState.username : ""}
-        />
+      <WatchedItems 
+        loggedIn = {true}
+        username={userDisplayState ? userDisplayState.username : ""}
+      />
       }      
       <PopularItems 
         username={userDisplayState ? userDisplayState.username : ""}

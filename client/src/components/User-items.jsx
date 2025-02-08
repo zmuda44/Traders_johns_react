@@ -4,8 +4,6 @@ function UserItems () {
 
 const [productsDisplayState, setProductsDisplayState] = useState([])
 
-
-
 useEffect(() => {
   const getProductsData = async () => {
       try {

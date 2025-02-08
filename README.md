@@ -24,9 +24,8 @@
   - Added functionality to query popular items based on number of watches and display on homepage and profile page.
   - Added User sold items to profile page and a seller dashboard which will allow the User to edit and delete their items listed for sale.
 
-  ## Upcoming:
-  The seller dashboard will allow a User to edit and delete their sold products
-  A User can click on any individual product and be taken to that individual product page with checkout options
+  ## Upcoming:  
+  The individual product page will have checkout options
 
   ## Website:
   https://traders-johns.onrender.com/
