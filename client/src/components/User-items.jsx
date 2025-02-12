@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import ProductCard from './Product-Card';
 
 function UserItems () {
 
 const [productsDisplayState, setProductsDisplayState] = useState([])
+const [username, setUsername] = useState("")
 
 useEffect(() => {
   const getProductsData = async () => {
@@ -20,7 +22,7 @@ useEffect(() => {
       const userData = await response.json()
       const productsData = userData.products
 
-     
+      setUsername(userData.username)
      
       setProductsDisplayState(productsData)
 
@@ -34,26 +36,17 @@ useEffect(() => {
 
 return (
 
-<div id="watched-items">
-
+<div id="user-items" className="product-section">
   <h3>Your Current Items For Sale</h3>
   <div className="card-container">
-
     {productsDisplayState.map((product) => (
-
-
-      <div key={product.id} className="card" value="">
-        <h3 className="product-name">{product.product_name}</h3>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">$ {product.price} </p>
-        <img src={`./public/images/${product.category.category_name}.jpg`} />
-      </div>
-
+      <ProductCard 
+        key={`u${product.id}`}    
+        product={product}
+        username={username ? username : ""}    
+      />
     ))}
-
-
   </div>
-
 </div>
   
 )

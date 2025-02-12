@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function CreateProduct () {
+  const navigate = useNavigate()
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -33,8 +35,9 @@ function CreateProduct () {
       });
 
       if (response.ok) {
-        // Redirect to the homepage upon successful login
-        navigate('/');
+        // Redirect back to profile to work as page reload for Render
+        window.location.reload()
+        // navigate('/profile');
 
       } else {
         console.log("Login failed.");
