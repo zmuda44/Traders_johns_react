@@ -31,12 +31,15 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details">
-      <h1>{product.product_name}</h1>
-      <p>{product.description}</p>
-      <p><strong>Price: </strong>${product.price}</p>
-      <p><strong>Category: </strong>{product.category.category_name}</p>
-      {/* Displaying an image based on category */}
-      <img src={`./images/${product.category.category_name}.jpg`} alt={product.product_name} />
+      <div className="container">
+
+        <h1>{product.product_name}</h1>
+        <p>{product.description}</p>
+        <p><strong>Price: </strong>${product.price}</p>
+        <p><strong>Category: </strong>{product.category.category_name}</p>
+        {/* Displaying an image based on category */}
+        <img src={`./images/${product.category.category_name}.jpg`} alt={product.product_name} />
+      </div>
     </div>
   );
 };

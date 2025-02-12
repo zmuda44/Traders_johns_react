@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import EditProductForm from '../components/Edit-product-form'
 
 
@@ -68,30 +69,31 @@ function EditItem () {
     getProductData();
     }, [productId]);
 
-console.log(productDisplayState.user_id)
-console.log(userDisplayState.id)
-  return (
 
-      
-  <div className="product-container" >
-    {userDisplayState.id == productDisplayState.user_id ? (
-      <div>
-        <h3 className="product-name">{productDisplayState.product_name}</h3>
-        <p className="product-description">{productDisplayState.description}</p>
-        <p className="product-price">$ {productDisplayState.price}</p>
-        {productDisplayState.category ? productDisplayState.category.category_name : "Category not available"}
-        {/* <img src={`./public/images/${productDisplayState.category}.jpg`} /> */}
-        
-        <button onClick={() => setIsEditing(true)}>Update or delete product</button>
-        
-        {isEditing && <EditProductForm
-          productId={productFormState.id}
-          originalProductFormState={productFormState} 
-        />}
-      </div>
-    ) : (
-      <div>This is not your product, visit seller dashboard or login to view product</div>
-    )}
+  return (      
+  <div className="edit-product" >
+    <div className="container" >
+
+      {userDisplayState.id == productDisplayState.user_id ? (
+        <>
+          <h3 className="product-name">{productDisplayState.product_name}</h3>
+          <p className="product-description">{productDisplayState.description}</p>
+          <p className="product-price">$ {productDisplayState.price}</p>
+          {productDisplayState.category ? productDisplayState.category.category_name : "Category not available"}
+          {/* <img src={`./public/images/${productDisplayState.category}.jpg`} /> */}
+          
+          <button onClick={() => setIsEditing(true)}>Update or delete product</button>
+          
+          {isEditing && <EditProductForm
+            productId={productFormState.id}
+            originalProductFormState={productFormState} 
+          />}
+        </>
+      ) : (
+        <h1>This is not your product, visit seller dashboard or login to view product</h1>
+      )}
+      <Link to="seller-dashboard"><p>Back to Seller Dashboard</p></Link>
+    </div>
   </div>
   )
 }

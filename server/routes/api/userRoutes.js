@@ -1,5 +1,7 @@
+
 const router = require('express').Router();
 const { User, Product, WatchedProduct, Category } = require('../../models');
+
 
 //Get User
 //api/users/me
@@ -40,8 +42,7 @@ router.get('/me', async (req, res) => {
 })
 
 
-//Create 
-// user
+//Create user
 //api/users
 router.post('/', async (req, res) => {
   try {

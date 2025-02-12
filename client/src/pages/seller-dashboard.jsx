@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import PopularItems from '../components/Popular-items.jsx'
 import WatchedItems from '../components/Watched-items.jsx'

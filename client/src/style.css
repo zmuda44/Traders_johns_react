@@ -148,6 +148,24 @@ aside {
 } */
 
 
+/* Product details page */
+.product-details .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;    
+}
+
+/* Edit products page */
+.edit-product .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
 
 
 /* Mobile menus */
