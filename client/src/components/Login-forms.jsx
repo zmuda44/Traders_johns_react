@@ -52,7 +52,8 @@ function LoginForms () {
         // Redirect to the homepage upon successful login
         // doesn't work in Render
         // document.location.replace('/profile');
-        navigate('/profile')
+        window.location.assign('/profile');
+        // navigate('/profile')
 
 
       } else {
@@ -83,7 +84,8 @@ function LoginForms () {
       if (response.ok) {
         // Redirect to the homepage upon successful login
         // document.location.replace('/profile');
-        navigate('/profile')
+        // navigate('/profile')
+        window.location.assign('/profile');
       } else {
         console.log("Login failed.");  
         setLoginError("An error occurred during login."); 
