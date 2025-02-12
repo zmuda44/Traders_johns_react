@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 
-
 function LoginForms () {
   const navigate = useNavigate()
 
@@ -17,6 +16,9 @@ function LoginForms () {
     // email: "",
     password: "",
   })
+
+  const [signupError, setSignupError] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const handleSignupChange = (event) => {
     const { name, value } = event.target;
@@ -55,10 +57,13 @@ function LoginForms () {
 
       } else {
         console.log("Login failed.");
+        setSignupError("An error occurred during signup.");
+        
       }  
 
     } catch (e) {
       console.error(e);
+      
     }
   };
 
@@ -80,11 +85,14 @@ function LoginForms () {
         // document.location.replace('/profile');
         navigate('/profile')
       } else {
-        console.log("Login failed.");
+        console.log("Login failed.");  
+        setLoginError("An error occurred during login."); 
+        setLoginFormState({ username: "", password: "" });     
       }
 
     } catch (e) {
       console.error(e);
+      
     }
   };
 
@@ -94,12 +102,14 @@ return (
 
 <div className="login">
   <h2>Login</h2>
+  {loginError && <div className="error-message">{loginError}</div>}
   <form id="login-form" className="form" onSubmit={handleLoginFormSubmit}>
     <div className="form-section">
       <label htmlFor="user-name">user name</label>
       <input type="text" 
       id="login-user-name"
       name="username"
+      value={userLoginFormState.username}
       onChange={handleLoginChange} />
     </div>
     <div className="form-section">
@@ -107,6 +117,7 @@ return (
       <input type="password" 
       id="login-password" 
       name="password"
+      value={userLoginFormState.password}
       onChange={handleLoginChange}
        />
   </div>
@@ -116,6 +127,7 @@ return (
 
 <div className="signup">
 <h2>Sign up</h2>
+{signupError && <div className="error-message">{signupError}</div>}
 <form id="signup-form" className="form" onSubmit={handleSignupFormSubmit}>
   <div className="form-section">
     <label htmlFor="signup-user-name">user name</label>

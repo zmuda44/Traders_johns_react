@@ -70,16 +70,12 @@ router.post('/login', async (req, res) => {
 
     const userData = await User.findOne({ where: { username: username } });
     if (!userData) {
-      return       
       res.status(400).json({ message: 'Incorrect username or password, please try again' });
     }
     const validPassword = userData.checkPassword(password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect username or password, please try again' });
-      return;
+      res.status(400).json({ message: 'Incorrect username or password, please try again' });
     }
 
     req.session.save(() => {
