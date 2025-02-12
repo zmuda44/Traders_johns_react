@@ -35,9 +35,8 @@ function CreateProduct () {
       });
 
       if (response.ok) {
-        // Redirect back to profile to work as page reload for Render
-        window.location.reload()
-        // navigate('/profile');
+        // Redirect back to profile to work as page reload for Render        
+        navigate(0);
 
       } else {
         console.log("Login failed.");
