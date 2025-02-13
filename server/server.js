@@ -42,10 +42,10 @@ app.use(session(sess));
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
   
-  app.get("*", (req, res) => {
-    // For any routes not handled by the server, send the main index.html file
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  });
+  // app.get("*", (req, res) => {
+  //   // For any routes not handled by the server, send the main index.html file
+  //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  // });
 }
 
 // app.use(cors({
