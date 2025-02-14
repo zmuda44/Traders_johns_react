@@ -37,6 +37,7 @@ const sess = {
 
 app.use(session(sess));
 
+app.use(routes);
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -53,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
 //   credentials: true, // Allow credentials if needed
 // }));
 
-app.use(routes);
+
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
