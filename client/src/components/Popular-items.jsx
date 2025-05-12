@@ -18,6 +18,8 @@ function PopularItems({ username }) {
         }
 
         const productsData = await response.json();
+
+
         setProductsDisplayState(productsData);
 
       } catch (err) {
@@ -32,7 +34,7 @@ function PopularItems({ username }) {
     <div id="popular-items" className="product-section">
       <h3>Popular Items</h3>
       <div className="card-container">
-        {productsDisplayState.map((product) => (
+        {productsDisplayState.slice(0,5).map((product) => (
           <ProductCard 
             key={`p${product.id}`}    
             product={product.product}
