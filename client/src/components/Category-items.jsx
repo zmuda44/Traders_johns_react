@@ -31,10 +31,16 @@ function CategoryItems ( {categoryId, username, chosen} ) {
     getCategoryData();
   }, [categoryId]);
 
+  const handleSortByLowestPrice = () => {
+    const sorted = [...productsDisplayState].sort((a, b) => a.price - b.price);
+    setProductsDisplayState(sorted);
+  };
+
   return (
     <div id="category-items" className="product-section">
       {/* Dynamically update the heading based on the selected category */}
       <h3>{chosen ? `Chosen Category is ${categoryDisplayState.categoryName}` : categoryDisplayState.categoryName || 'Category Items'}</h3>
+      <button>Most popular</button><button onClick={handleSortByLowestPrice}>Lowest price</button>
 
       <div className="card-container">
         {productsDisplayState.map((product) => (
