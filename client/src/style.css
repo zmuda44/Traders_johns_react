@@ -171,28 +171,6 @@ aside {
 /* Mobile menus */
 
 @media screen and (max-width: 1000px) {
-    .hamburger-menu  {
-        display: block;
-    }
-
-    .hamburger-menu span {
-        display: block;
-        height: 5px;
-        width: 30px;
-        background-color: black;
-        margin-top: 2px;
-    }
-
-    /* .header-btn-container {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 60px;
-        background-color: rgb(231, 255, 255);
-        border: solid;
-        height: 100px;
-        padding: 0 10px;
-    } */
 
     .header-btn-container.active {
         display: flex;

@@ -62,12 +62,6 @@ return (
         <a href="/login" className="login-signup"><p>Login or Signup here <br />to begin buying and selling</p></a>
         )}
       </div>
-
-      <div className="hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </div>
   </header>
 
